@@ -15,7 +15,7 @@
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
         <li class="menu-item @if(request()->routeIS('admin-dashboard')) active @endif">
-            <a wire:navigate href="{{ route('admin-dashboard') }}" class="menu-link">
+            <a href="{{ route('admin-dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
@@ -26,28 +26,28 @@
         </li>
 
         <li class="menu-item @if(request()->routeIS('admin-student')) active @endif">
-            <a wire:navigate href="{{ route('admin-student') }}" class="menu-link">
+            <a href="{{ route('admin-student') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Student Management</div>
             </a>
         </li>
 
         <li class="menu-item @if(request()->routeIS('admin-room')) active @endif">
-            <a wire:navigate href="{{ route('admin-room') }}" class="menu-link">
+            <a href="{{ route('admin-room') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Room Management</div>
             </a>
         </li>
 
         <li class="menu-item @if(request()->routeIS('admin-maintenance')) active @endif">
-            <a wire:navigate href="{{ route('admin-maintenance') }}" class="menu-link">
+            <a href="{{ route('admin-maintenance') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Maintenance Management</div>
             </a>
         </li>
 
         <li class="menu-item @if(request()->routeIS('admin-bill')) active @endif">
-            <a wire:navigate href="{{ route('admin-bill') }}" class="menu-link">
+            <a href="{{ route('admin-bill') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Bill Management</div>
             </a>
