@@ -1,4 +1,8 @@
 <div>
+    @if(session()->has('fail'))
+        <div class="alert alert-danger mb-3" role="alert"> {{ session('fail') }} </div>
+    @endif
+
     <form wire:submit="login">
         <div class="mb-3">
             <label class="form-label">Email</label>

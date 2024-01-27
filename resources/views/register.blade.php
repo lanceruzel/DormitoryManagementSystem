@@ -140,7 +140,7 @@
 
               @livewire('accountRegistrationForm')
 
-              <p class="text-center">
+              <p class="text-center mt-3">
                 <span>Already have an account?</span>
                 <a href="{{ route('login') }}">
                   <span>Sign in instead</span>

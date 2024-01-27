@@ -66,14 +66,14 @@
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
             <!-- Menu -->
-            @include('layout.partials.admin.sidebar')  
+            @livewire('sidebar')
             <!-- / Menu -->
 
             <!-- Layout container -->
             <div class="layout-page">
 
                 <!-- Navbar -->
-                @include('layout.partials.admin.navbar')
+                @livewire('navbar')
                 <!-- / Navbar -->
 
                 <!-- Content wrapper -->

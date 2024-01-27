@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+use Exception;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
@@ -15,12 +17,18 @@ class AccountLoginForm extends Component
     public $password = '';
 
     public function login(){
-        //First method of validation
-        // $this->validate([
-        //     'email' => 'required',
-        //     'password' => 'required',
-        // ]);
-        $this->validate();
+        $validated = $this->validate();
+
+        try{
+            if(Auth::attempt($validated)){
+                session()->regenerate();
+                return redirect()->route('admin-dashboard');
+            }else{
+                session()->flash('fail', 'Account does not exists or your login credentials are wrong.');
+            }
+        }catch(Exception $e){
+            dump($e->getMessage());
+        }
     }
 
     public function render()

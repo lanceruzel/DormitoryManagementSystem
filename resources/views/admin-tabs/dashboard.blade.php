@@ -5,7 +5,7 @@
                 <div class="d-flex align-items-end row">
                     <div class="col-sm-7">
                         <div class="card-body">
-                            <h5 class="card-title text-primary">Welcome, Owner's Name!🌟</h5>
+                            <h5 class="card-title text-primary">Welcome, {{ auth()->user()->first_name . ' ' . auth()->user()->last_name}}!🌟</h5>
                             <p class="mb-4">
                                 Let's streamline operations, enhance resident experiences, and make dormitory management a breeze. Together, we'll create a top-notch living space!
                             </p>

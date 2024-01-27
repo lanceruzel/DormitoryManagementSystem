@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Models\Account;
+use Exception;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
@@ -24,9 +26,24 @@ class AccountRegistrationForm extends Component
 
     public function registerUser(){
         $validated = $this->validate();
-        $this->reset(['first_name', 'last_name', 'email', 'password', 'password_confirmation']);
 
-        session()->flash('success', 'Account successfully created.');
+        try{
+            $createAccount = Account::create([
+                'first_name' => $validated['first_name'],
+                'last_name' => $validated['last_name'],
+                'email' => $validated['email'],
+                'password' => bcrypt($validated['password'])
+            ]);
+
+            if($createAccount){
+                session()->flash('success', 'Account successfully created.');
+                $this->reset(['first_name', 'last_name', 'email', 'password', 'password_confirmation']);
+            }else{
+                session()->flash('fail', 'There seems to be a problem creating this account.');
+            }
+        }catch(Exception $e){
+            dump($e->getMessage());
+        }
     }
 
     public function render()
