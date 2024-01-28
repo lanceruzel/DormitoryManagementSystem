@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Student;
 use Exception;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
@@ -63,6 +64,32 @@ class StudentForm extends Component
     #[Rule('')]
     public $assigned_room = '';
 
+    #[On('show-student')]
+    public function getStudent($id = null){
+        $student = Student::find($id);
+
+        if($student){
+            $this->first_name = $student[0]['first_name'];
+            $this->middle_name = $student[0]['middle_name'];
+            $this->last_name = $student[0]['last_name'];
+            $this->birthdate = $student[0]['birthdate'];
+            $this->gender = $student[0]['gender'];
+            $this->address = $student[0]['address'];
+            $this->email = $student[0]['email'];
+            $this->contact = $student[0]['contact'];
+            $this->image = $student[0]['image'];
+            $this->e_fullname = $student[0]['e_fullname'];
+            $this->e_contact = $student[0]['e_contact'];
+            $this->e_address = $student[0]['e_address'];
+            $this->e_relation = $student[0]['e_relation'];
+            $this->s_id = $student[0]['s_id'];
+            $this->s_college = $student[0]['s_college'];
+            $this->s_program = $student[0]['s_program'];
+            $this->s_cor = $student[0]['s_cor'];
+            $this->assigned_room = $student[0]['assigned_room'];
+        }
+    }
+
     public function addStudent(){
         $validated = $this->validate();
 
@@ -90,24 +117,8 @@ class StudentForm extends Component
 
             if($studentCreate){
                 //reset form
-                $this->reset([
-                    'first_name', 
-                    'middle_name', 
-                    'last_name',
-                    'birthdate',
-                    'gender',
-                    'address',
-                    'email',
-                    'contact',
-                    'e_fullname',
-                    'e_contact',
-                    'e_address',
-                    'e_relation',
-                    's_id',
-                    's_college',
-                    's_program',
-                    'assigned_room',
-                ]);
+                $this->resetForm();
+                
                 session()->flash('success', 'Account successfully created.');
 
                 //Pass/trigger data to another component
@@ -118,6 +129,31 @@ class StudentForm extends Component
         }catch(Exception $e){
             dump($e->getMessage());
         }
+    }
+
+    public function closeModal(){
+        $this->resetForm();
+    }
+
+    public function resetForm(){
+        $this->reset([
+            'first_name', 
+            'middle_name', 
+            'last_name',
+            'birthdate',
+            'gender',
+            'address',
+            'email',
+            'contact',
+            'e_fullname',
+            'e_contact',
+            'e_address',
+            'e_relation',
+            's_id',
+            's_college',
+            's_program',
+            'assigned_room',
+        ]);
     }
 
     public function render()

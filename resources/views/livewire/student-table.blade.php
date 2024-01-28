@@ -3,7 +3,7 @@
         <h5>Student List</h5>
 
         <div class="d-flex flex-row">
-            <input wire:model.live.debounce.500ms="search" class="form-control" type="text" placeholder="Search...">
+            <input wire:model.live.debounce.200ms="search" class="form-control" type="text" placeholder="Search...">
         </div>
     </div>
 
@@ -22,7 +22,7 @@
             <tbody class="table-border-bottom-0">
                 @foreach ($this->students as $student)
                     <tr>
-                        <td>{{ $student->first_name . ' ' . $student->middleN_name . ' ' . $student->last_name }}</td>
+                        <td>{{ $student->first_name . ' ' . $student->middle_name . ' ' . $student->last_name }}</td>
                         <td>{{ $student->email }}</td>
                         <td>{{ $student->gender }}</td>
                         <td>{{ $student->contact }}</td>
@@ -33,9 +33,9 @@
                             </button>
 
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal_viewStudentInformations">
+                                <a class="dropdown-item" href="javascript:void(0);" wire:click='showSelectedStudent({{ $student->id }})' data-bs-toggle="modal" data-bs-target="#modal_viewStudentInformations">
                                     <i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modal_deletetion">
+                                <a class="dropdown-item" href="javascript:void(0);" wire:click='deleteSelectedStudent({{ $student->id }})' data-bs-toggle="modal" data-bs-target="#modal_deletetion">
                                     <i class="bx bx-trash me-1"></i> Delete</a>
                             </div>
                         </td>

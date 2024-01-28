@@ -14,9 +14,17 @@ class StudentTable extends Component
 
     public $search = '';
 
+    public function showSelectedStudent($id){
+        $this->dispatch('show-student', ['student-id' => $id]);
+    }
+
+    public function deleteSelectedStudent($id){
+        $this->dispatch('delete-student', ['student-id' => $id]);
+    }
+
     #[Computed()]
     public function students(){
-        return Student::where('first_name', 'like', "%{$this->search}%")->paginate(10);
+        return Student::where('first_name', 'like', "%{$this->search}%")->orderBy('id','DESC')->paginate(10);
     }
 
     #[On('student-created')]

@@ -123,8 +123,8 @@
 
                         <select wire:model="gender" class="form-select @error('gender') is-invalid @enderror" aria-label="gender">
                             <option selected>Select Gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
                         </select>
 
                         <div class="invalid-feedback">
@@ -308,6 +308,10 @@
             </div>
         </div>
 
-        <button class="btn btn-primary">Save changes</button>
+        <div class="w-100 d-flex align-items-center justify-content-end">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+            <button class="btn btn-primary ms-2">Save changes</button>
+        </div>
+        
     </form>
 </div>
