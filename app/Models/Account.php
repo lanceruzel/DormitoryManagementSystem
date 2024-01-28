@@ -13,9 +13,6 @@ class Account extends Authenticatable
 
     public $table = 'accounts';
 
-    const CREATED_AT = null;
-    const UPDATED_AT = null;
-
     protected $fillable = [
         'first_name',
         'last_name',
