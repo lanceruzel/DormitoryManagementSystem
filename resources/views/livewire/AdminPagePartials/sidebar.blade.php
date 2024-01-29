@@ -53,6 +53,13 @@
             </a>
         </li>
 
+        <li class="menu-item @if (request()->routeIS('admin-inventory')) active @endif">
+            <a href="{{ route('admin-inventory') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Inventory Item</div>
+            </a>
+        </li>
+
         <!-- Components -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
         <!-- Cards -->

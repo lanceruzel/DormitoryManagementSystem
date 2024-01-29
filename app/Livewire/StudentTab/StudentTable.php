@@ -24,7 +24,15 @@ class StudentTable extends Component
 
     #[Computed()]
     public function students(){
-        return Student::where('first_name', 'like', "%{$this->search}%")->orderBy('id','DESC')->paginate(10);
+        return Student::where(function ($query) {
+            $query->where('first_name', 'like', "%{$this->search}%")
+                ->orWhere('middle_name', 'like', "%{$this->search}%")
+                ->orWhere('last_name', 'like', "%{$this->search}%")
+                ->orWhere('contact', 'like', "%{$this->search}%")
+                ->orWhere('email', 'like', "%{$this->search}%");
+        })
+        ->orderBy('id', 'DESC')
+        ->paginate(10);
     }
 
     #[On('student-created')]

@@ -50,7 +50,7 @@
                                 <li class="form-check">
                                     <input class="form-check-input" type="checkbox" checked onclick="return false;">
                                     <label class="form-check-label">
-                                        Comfort Room
+                                        2x Comfort Room
                                     </label>
                                 </li>
     
@@ -158,12 +158,12 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-6 mb-3>
+                        <div class="col-6 mb-3">
                             <label for="nameBasic" class="form-label">Rental Rate</label>
                             <input type="number" inputmode="numeric" id="" class="form-control" placeholder="Enter rate" />
                         </div>
 
-                        <div class="col-6 mb-3>
+                        <div class="col-6 mb-3">
                             <label for="nameBasic" class="form-label">Availability</label>
                             
                             <select class="form-control selectpicker">

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('birthdate');
             $table->string('gender');
             $table->string('address');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('contact');
             $table->binary('image');
             $table->string('e_fullname');

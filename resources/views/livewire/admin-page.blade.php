@@ -18,4 +18,8 @@
     @if(request()->routeIS('admin-bill'))
         @include('admin-tabs.bill-management')
     @endif
+
+    @if(request()->routeIS('admin-inventory'))
+        @include('admin-tabs.inventory-item')
+    @endif
 </div>

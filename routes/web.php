@@ -20,6 +20,7 @@ Route::get('/room-management', AdminPage::class)->middleware('auth')->name('admi
 Route::get('/student-management', AdminPage::class)->middleware('auth')->name('admin-student');
 Route::get('/maintenance-management', AdminPage::class)->middleware('auth')->name('admin-maintenance');
 Route::get('/bill-management', AdminPage::class)->middleware('auth')->name('admin-bill');
+Route::get('/inventory-item', AdminPage::class)->middleware('auth')->name('admin-inventory');
 
 Route::get('/login', function () {
     return view('login');
