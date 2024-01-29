@@ -102,7 +102,16 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-primary ms-2">Add Item</button>
+                    <button class="btn btn-primary ms-2">
+                        <span wire:loading>
+                            <div class="spinner-border spinner-border-sm" role="status">
+                                <span class="visually-hidden"></span>
+                            </div>
+                            Loading....
+                        </span>
+                        
+                        <span wire:loading.remove>Add Item</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -122,7 +131,16 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-primary ms-2">Save Changes</button>
+                    <button class="btn btn-primary ms-2">
+                        <span wire:loading>
+                            <div class="spinner-border spinner-border-sm" role="status">
+                                <span class="visually-hidden"></span>
+                            </div>
+                            Loading....
+                        </span>
+                        
+                        <span wire:loading.remove>Save Changes</span>
+                    </button>
                 </div>
             </div>
         </div>

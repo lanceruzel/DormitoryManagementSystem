@@ -179,6 +179,8 @@ class StudentModal extends Component
         ]);
 
         $this->id = '';
+
+        $this->resetErrorBag();
     }
 
     #[On('delete-student')]
@@ -212,6 +214,6 @@ class StudentModal extends Component
 
     public function render()
     {
-        return view('livewire.Modals.student-modal');
+        return view('livewire.StudentTab.student-modal');
     }
 }

@@ -38,6 +38,6 @@ class StudentTable extends Component
     #[On('student-created')]
     public function render()
     {
-        return view('livewire.tables.student-table');
+        return view('livewire.StudentTab.student-table');
     }
 }

@@ -42,7 +42,7 @@
 
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
-
+        
     <!-- First, defer the scripts with dependencies -->
     <script defer src="{{ asset('../assets/vendor/libs/jquery/jquery.js') }}"></script>
     <script defer src="{{ asset('../assets/vendor/libs/popper/popper.js') }}"></script>
