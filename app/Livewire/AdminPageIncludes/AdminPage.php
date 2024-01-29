@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\AdminPageIncludes;
 
-use Illuminate\Routing\Route;
 use Livewire\Attributes\Layout;
-use Livewire\Attributes\On;
 use Livewire\Component;
 
-#[Layout('layout.admin')]
+#[Layout('layout.admin-page-layout')]
 class AdminPage extends Component
 {
     public function render(){

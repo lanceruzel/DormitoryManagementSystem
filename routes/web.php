@@ -1,6 +1,6 @@
 <?php
 
-use App\Livewire\AdminPage;
+use App\Livewire\AdminPageIncludes\AdminPage;
 use Illuminate\Support\Facades\Route;
 
 /*

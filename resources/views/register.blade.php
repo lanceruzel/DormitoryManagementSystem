@@ -138,7 +138,7 @@
               <h4 class="mb-2">Adventure starts here 🚀</h4>
               <p class="mb-4">Make your app management easy and fun!</p>
 
-              @livewire('accountRegistrationForm')
+              @livewire('LoginAndRegisterForm.AccountRegistrationForm')
 
               <p class="text-center mt-3">
                 <span>Already have an account?</span>

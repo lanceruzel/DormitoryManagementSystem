@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\LoginAndRegisterForm;
 
 use App\Models\Account;
 use Exception;
@@ -48,6 +48,6 @@ class AccountRegistrationForm extends Component
 
     public function render()
     {
-        return view('livewire.forms.account-registration-form');
+        return view('livewire.LoginAndRegisterForm.account-registration-form');
     }
 }

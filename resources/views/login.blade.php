@@ -138,7 +138,7 @@
               <h4 class="mb-2">Welcome to NAME Dormitory! 👋</h4>
               <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
-              @livewire('accountLoginForm')
+              @livewire('LoginAndRegisterForm.AccountLoginForm')
 
               <p class="text-center">
                 <span>New on our platform?</span>

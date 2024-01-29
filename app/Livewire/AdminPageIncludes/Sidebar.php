@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\AdminPageIncludes;
 
 use Livewire\Component;
 
@@ -8,6 +8,6 @@ class Sidebar extends Component
 {
     public function render()
     {
-        return view('livewire.partials.sidebar');
+        return view('livewire.AdminPagePartials.sidebar');
     }
 }

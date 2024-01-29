@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\StudentTab;
 
 use App\Models\Student;
 use Exception;
@@ -8,8 +8,10 @@ use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
-class StudentForm extends Component
+class StudentModal extends Component
 {
+    public $id = '';
+
     #[Rule('required|min:3')]
     public $first_name = '';
 
@@ -28,7 +30,7 @@ class StudentForm extends Component
     #[Rule('required|min:5')]
     public $address = '';
 
-    #[Rule('required|email')]
+    #[Rule('required|email|')]
     public $email = '';
 
     #[Rule('required|min:5')]
@@ -65,10 +67,11 @@ class StudentForm extends Component
     public $assigned_room = '';
 
     #[On('show-student')]
-    public function getStudent($id = null){
+    public function getStudent($id){
         $student = Student::find($id);
 
         if($student){
+            $this->id = $id;
             $this->first_name = $student[0]['first_name'];
             $this->middle_name = $student[0]['middle_name'];
             $this->last_name = $student[0]['last_name'];
@@ -90,11 +93,20 @@ class StudentForm extends Component
         }
     }
 
-    public function addStudent(){
+    public function storeStudent(){
         $validated = $this->validate();
 
         try{
-            $studentCreate = Student::create([
+            $checkEmail = Student::where('email', $validated['email'])
+                            ->where('id', '<>', $this->id)
+                            ->first();
+
+            if ($checkEmail) {
+                return $this->addError('email', 'Email already exists');
+            }
+
+            //Store database fields
+            $studentData = [
                 'first_name' => $validated['first_name'],
                 'middle_name' => $validated['middle_name'],
                 'last_name' => $validated['last_name'],
@@ -113,30 +125,41 @@ class StudentForm extends Component
                 's_program' => $validated['s_program'],
                 's_cor' => $validated['s_cor'],
                 'assigned_room' => $validated['assigned_room'],
-            ]);
+            ];
+
+            //Check if it's an update and email has changed 
+            if ($this->id && $this->email != $validated['email']) {
+                $studentData['email'] = $validated['email'];
+            }
+
+            $studentCreate = Student::updateOrCreate(
+                ['id' => $this->id], //Update the data if id is existing
+                $studentData
+            );
 
             if($studentCreate){
-                //reset form
-                $this->resetForm();
-                
-                session()->flash('success', 'Account successfully created.');
+                $this->dispatch('showToast', [
+                    'mode' => 'success' ,
+                    'message' => 'Successfully Updated/Created'
+                ]);
 
-                //Pass/trigger data to another component
                 $this->dispatch('student-created');
+                $this->dispatch('close-student-add-edit-delete-modal');
             }else{
-                session()->flash('fail', 'There seems to be a problem creating this account.');
+                $this->dispatch('showToast', [
+                    'mode' => 'danger' ,
+                    'message' => 'There seems to be a problem Updating/Creating this student'
+                ]);
             }
         }catch(Exception $e){
             dump($e->getMessage());
         }
     }
 
-    public function closeModal(){
-        $this->resetForm();
-    }
-
+    #[On('reset-form')]
     public function resetForm(){
         $this->reset([
+            'id',
             'first_name', 
             'middle_name', 
             'last_name',
@@ -154,10 +177,41 @@ class StudentForm extends Component
             's_program',
             'assigned_room',
         ]);
+
+        $this->id = '';
+    }
+
+    #[On('delete-student')]
+    public function getStudentID($id){
+        $this->id = $id;
+    }
+
+    public function deleteStudent(){
+        try{
+            $student = Student::where('id', $this->id)->delete();
+
+            if($student){
+                $this->dispatch('student-created');
+                $this->dispatch('close-student-add-edit-delete-modal');
+                $this->id = '';
+
+                $this->dispatch('showToast', [
+                    'mode' => 'success' ,
+                    'message' => 'Successfully Deleted'
+                ]);
+            }else{
+                $this->dispatch('showToast', [
+                    'mode' => 'danger' ,
+                    'message' => 'There seems to be a problem deleting this student'
+                ]);
+            }
+        }catch(Exception $e){
+            dump($e->getMessage());
+        }
     }
 
     public function render()
     {
-        return view('livewire.student-form');
+        return view('livewire.Modals.student-modal');
     }
 }

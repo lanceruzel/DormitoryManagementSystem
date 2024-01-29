@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\LoginAndRegisterForm;
 
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +33,6 @@ class AccountLoginForm extends Component
 
     public function render()
     {
-        return view('livewire.forms.account-login-form');
+        return view('livewire.LoginAndRegisterForm.account-login-form');
     }
 }

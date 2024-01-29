@@ -33,9 +33,9 @@
                             </button>
 
                             <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href="javascript:void(0);" wire:click='showSelectedStudent({{ $student->id }})' data-bs-toggle="modal" data-bs-target="#modal_viewStudentInformations">
+                                <a class="dropdown-item" href="javascript:void(0);" wire:click='showSelectedStudent({{ $student->id }})' data-bs-toggle="modal" data-bs-target="#modal_editStudent">
                                     <i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                <a class="dropdown-item" href="javascript:void(0);" wire:click='deleteSelectedStudent({{ $student->id }})' data-bs-toggle="modal" data-bs-target="#modal_deletetion">
+                                <a class="dropdown-item" href="javascript:void(0);" wire:click='deleteSelectedStudent({{ $student->id }})' data-bs-toggle="modal" data-bs-target="#modal_deleteStudent">
                                     <i class="bx bx-trash me-1"></i> Delete</a>
                             </div>
                         </td>
@@ -51,3 +51,4 @@
         </div>
     </div>
 </div>
+

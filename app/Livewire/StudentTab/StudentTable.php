@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\StudentTab;
 
 use App\Models\Student;
 use Livewire\Attributes\Computed;
@@ -30,6 +30,6 @@ class StudentTable extends Component
     #[On('student-created')]
     public function render()
     {
-        return view('livewire.student-table');
+        return view('livewire.tables.student-table');
     }
 }
