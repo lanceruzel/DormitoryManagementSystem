@@ -67,7 +67,7 @@ class StudentModal extends Component
     public $assigned_room = '';
 
     #[On('show-student')]
-    public function getStudent($id){
+    public function getSelectedItemInformation($id){
         $student = Student::find($id);
 
         if($student){
@@ -93,7 +93,7 @@ class StudentModal extends Component
         }
     }
 
-    public function storeStudent(){
+    public function storeItem(){
         $validated = $this->validate();
 
         try{
@@ -144,11 +144,11 @@ class StudentModal extends Component
                 ]);
 
                 $this->dispatch('student-created');
-                $this->dispatch('close-student-add-edit-delete-modal');
+                $this->dispatch('close-add-edit-delete-modal');
             }else{
                 $this->dispatch('showToast', [
                     'mode' => 'danger' ,
-                    'message' => 'There seems to be a problem Updating/Creating this student'
+                    'message' => 'There seems to be a problem Updating/Creating this item.'
                 ]);
             }
         }catch(Exception $e){
@@ -184,17 +184,17 @@ class StudentModal extends Component
     }
 
     #[On('delete-student')]
-    public function getStudentID($id){
+    public function getItemID($id){
         $this->id = $id;
     }
 
-    public function deleteStudent(){
+    public function deleteItem(){
         try{
             $student = Student::where('id', $this->id)->delete();
 
             if($student){
                 $this->dispatch('student-created');
-                $this->dispatch('close-student-add-edit-delete-modal');
+                $this->dispatch('close-add-edit-delete-modal');
                 $this->id = '';
 
                 $this->dispatch('showToast', [
@@ -204,7 +204,7 @@ class StudentModal extends Component
             }else{
                 $this->dispatch('showToast', [
                     'mode' => 'danger' ,
-                    'message' => 'There seems to be a problem deleting this student'
+                    'message' => 'There seems to be a problem deleting this item.'
                 ]);
             }
         }catch(Exception $e){

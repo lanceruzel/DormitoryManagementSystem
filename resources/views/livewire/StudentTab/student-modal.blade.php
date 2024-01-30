@@ -1,5 +1,5 @@
 <div>
-    <div wire:ignore.self class="modal fade" id="modal_addStudent" tabindex="-1" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="modal_addItem" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -8,7 +8,7 @@
                 </div>
 
                     <div class="modal-body">
-                        <form wire:submit="storeStudent">
+                        <form wire:submit="storeItem">
                                 @include('Forms.student-form')
                     </div>
 
@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <div wire:ignore.self class="modal fade" id="modal_editStudent" tabindex="-1" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="modal_editItem" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -39,7 +39,7 @@
                 </div>
 
                     <div class="modal-body">
-                        <form wire:submit="storeStudent">
+                        <form wire:submit="storeItem">
                                 @include('Forms.student-form')
                     </div>
 
@@ -61,7 +61,7 @@
         </div>
     </div>
     
-    <div wire:ignore.self class="modal fade" id="modal_deleteStudent" tabindex="-1" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="modal_deleteItem" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -75,7 +75,7 @@
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                         Cancel
                     </button>
-                    <button type="button" class="btn btn-primary" wire:click='deleteStudent'>Yes, confirm delete</button>
+                    <button type="button" class="btn btn-primary" wire:click='deleteItem'>Yes, confirm delete</button>
                 </div>
             </div>
         </div>
@@ -84,19 +84,19 @@
 
 @script
 <script>
-    $('#modal_editStudent').on('hidden.bs.modal', function (e) {
+    $('#modal_addItem').on('hidden.bs.modal', function (e) {
         $wire.dispatch('reset-form');
     });
 
-    $('#modal_addStudent').on('hidden.bs.modal', function (e) {
+    $('#modal_editItem').on('hidden.bs.modal', function (e) {
         $wire.dispatch('reset-form');
     });
 
     //Hide modal when successfully updated student or added
-    $wire.on('close-student-add-edit-delete-modal', () => {
-        $('#modal_editStudent').modal('hide');
-        $('#modal_addStudent').modal('hide');
-        $('#modal_deleteStudent').modal('hide');
+    $wire.on('close-add-edit-delete-modal', () => {
+        $('#modal_editItem').modal('hide');
+        $('#modal_addItem').modal('hide');
+        $('#modal_deleteItem').modal('hide');
     });
 </script>
 @endscript
