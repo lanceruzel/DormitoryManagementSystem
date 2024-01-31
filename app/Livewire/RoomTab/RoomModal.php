@@ -1,43 +1,48 @@
 <?php
 
-namespace App\Livewire\InventoryItemTab;
+namespace App\Livewire\RoomTab;
 
 use App\Interfaces\ModalCrud;
 use App\Models\InventoryItem;
+use App\Models\Room;
 use Exception;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
-class InventoryItemModal extends Component implements ModalCrud
+class RoomModal extends Component implements ModalCrud
 {
+    public $selectedAmenities = [];
+
     public $id = '';
 
     #[Rule('required')]
-    public $name = '';
+    public $room_name = '';
 
     #[Rule('required')]
-    public $description = '';
+    public $room_capacity = '';
 
     #[Rule('required')]
-    public $quantity = '';
+    public $room_rate = '';
 
-    public $stock_available = '';
+    #[Rule('required')]
+    public $comfort_room = false;
 
-    #[Rule('required|min:1')]
-    public $unit_price = '';
+    #[Rule('required')]
+    public $status = '';
 
-    #[On('show-inventory-item')]
+    #[On('show-room')]
     public function getSelectedItemInformation($id){
-        $item = InventoryItem::find($id);
+        $item = Room::find($id);
 
         if($item){
             $this->id = $id;
-            $this->name = $item[0]['name'];
-            $this->description = $item[0]['description'];
-            $this->quantity = $item[0]['quantity'];
-            $this->unit_price = $item[0]['unit_price'];
-            $this->stock_available = $item[0]['stock_available'];
+            $this->room_name = $item[0]['room_name'];
+            $this->room_capacity = $item[0]['room_capacity'];
+            $this->room_rate = $item[0]['room_rate'];
+            $this->comfort_room = $item[0]['comfort_room'];
+            $this->status = $item[0]['status'];
         }
     }
 
@@ -45,29 +50,29 @@ class InventoryItemModal extends Component implements ModalCrud
         $validated = $this->validate();
 
         try{
-            $checkIfExisting = InventoryItem::where('name', $validated['name'])
+            $checkIfExisting = Room::where('room_name', $validated['room_name'])
                             ->where('id', '<>', $this->id)
                             ->first();
 
             if ($checkIfExisting) {
-                return $this->addError('name', 'Item name already exists');
+                return $this->addError('room_name', 'Room name already exists');
             }
 
             //Store database fields
             $itemData = [
-                'name' => $validated['name'],
-                'description' => $validated['description'],
-                'quantity' => $validated['quantity'],
-                'stock_available' => $validated['quantity'],
-                'unit_price' => $validated['unit_price'],
+                'room_name' => $validated['room_name'],
+                'room_capacity' => $validated['room_capacity'],
+                'room_rate' => $validated['room_rate'],
+                'comfort_room' => $validated['comfort_room'],
+                'status' => $validated['status'],
             ];
 
             //Check if it's an update and email has changed 
-            if ($this->id && $this->name != $validated['name']) {
-                $itemData['name'] = $validated['name'];
+            if ($this->id && $this->room_name != $validated['room_name']) {
+                $itemData['room_name'] = $validated['room_name'];
             }
 
-            $itemCreateUpdate = InventoryItem::updateOrCreate(
+            $itemCreateUpdate = Room::updateOrCreate(
                 ['id' => $this->id], //Update the data if id is existing
                 $itemData
             );
@@ -78,7 +83,7 @@ class InventoryItemModal extends Component implements ModalCrud
                     'message' => 'Item successfully Updated/Created.'
                 ]);
 
-                $this->dispatch('item-created');
+                $this->dispatch('room-created');
                 $this->dispatch('close-add-edit-delete-modal');
             }else{
                 $this->dispatch('showToast', [
@@ -95,10 +100,11 @@ class InventoryItemModal extends Component implements ModalCrud
     public function resetForm(){
         $this->reset([
             'id',
-            'name', 
-            'description', 
-            'quantity', 
-            'unit_price', 
+            'room_name', 
+            'room_capacity', 
+            'room_rate', 
+            'comfort_room', 
+            'status', 
         ]);
 
         $this->id = '';
@@ -106,17 +112,17 @@ class InventoryItemModal extends Component implements ModalCrud
         $this->resetErrorBag();
     }
 
-    #[On('delete-inventory-item')]
+    #[On('delete-room')]
     public function getItemID($id){
         $this->id = $id;
     }
 
     public function deleteItem(){
         try{
-            $itemDelete = InventoryItem::where('id', $this->id)->delete();
+            $itemDelete = Room::where('id', $this->id)->delete();
 
             if($itemDelete){
-                $this->dispatch('item-created');
+                $this->dispatch('room-created');
                 $this->dispatch('close-add-edit-delete-modal');
                 $this->id = '';
 
@@ -135,7 +141,21 @@ class InventoryItemModal extends Component implements ModalCrud
         }
     }
 
-    public function render(){
-        return view('livewire.InventoryItemTab.inventory-item-modal');
+    public function selectOptionItems(){
+        return InventoryItem::orderBy('name', 'DESC')->get();
+    }
+
+    #[Computed()]
+    public function amenities(){
+        if(!empty($this->selectedAmenities)){
+            return InventoryItem::whereIn('id', $this->selectedAmenities)->get();
+        }else{
+            return [];
+        }
+    }
+
+    public function render()
+    {
+        return view('livewire.RoomTab.room-modal');
     }
 }

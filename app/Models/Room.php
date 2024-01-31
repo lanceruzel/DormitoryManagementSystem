@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class InventoryItem extends Model
+class Room extends Model
 {
     use HasFactory;
 
-    public $table = 'inventory_item';
+    public $table = 'rooms';
 
     protected $fillable = [
-        'name',
-        'description',
-        'quantity',
-        'stock_available',
-        'unit_price',
+        'room_name',
+        'room_capacity',
+        'room_rate',
+        'comfort_room',
+        'status',
     ];
 }

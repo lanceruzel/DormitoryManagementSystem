@@ -31,6 +31,8 @@
     <link rel="stylesheet" href="{{ asset('../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
 
     <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Page CSS -->
 
     <!-- Helpers -->
@@ -40,9 +42,6 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script defer src="{{ asset('../assets/js/config.js') }}"></script>
 
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
-        
     <!-- First, defer the scripts with dependencies -->
     <script defer src="{{ asset('../assets/vendor/libs/jquery/jquery.js') }}"></script>
     <script defer src="{{ asset('../assets/vendor/libs/popper/popper.js') }}"></script>
@@ -52,7 +51,6 @@
     <script defer src="{{ asset('../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
     <script defer src="{{ asset('../assets/vendor/libs/masonry/masonry.js') }}"></script>
     <script defer src="{{ asset('../assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
-    <script defer src="{{ asset('../assets/vendor/libs/bootstrap-select/bootstrap-select.js') }}"></script>
 
     <!-- Defer the remaining scripts -->
     <script defer src="{{ asset('../assets/vendor/js/menu.js') }}"></script>
@@ -60,6 +58,7 @@
     <script defer src="{{ asset('../assets/js/dashboards-analytics.js') }}"></script>
     <script defer src="{{ asset('../assets/js/extended-ui-perfect-scrollbar.js') }}"></script>
     <script defer async src="https://buttons.github.io/buttons.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 
 <body>

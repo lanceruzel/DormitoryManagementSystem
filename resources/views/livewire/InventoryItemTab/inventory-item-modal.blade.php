@@ -53,23 +53,18 @@
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                         Cancel
                     </button>
-                    <button type="button" class="btn btn-primary" wire:click='deleteItem'>Yes, confirm delete</button>
+                    <button class="btn btn-primary ms-2">
+                        <span wire:loading>
+                            <div class="spinner-border spinner-border-sm" role="status">
+                                <span class="visually-hidden"></span>
+                            </div>
+                            Deleting....
+                        </span>
+                        
+                        <span wire:loading.remove wire:click='deleteItem'>Yes, confirm delete</span>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-@script
-<script>
-    $('#modal_addEditItem').on('hidden.bs.modal', function (e) {
-        $wire.dispatch('reset-form');
-    });
-
-    //Hide modal when successfully updated student or added
-    $wire.on('close-add-edit-delete-modal', () => {
-        $('#modal_addEditItem').modal('hide');
-        $('#modal_deleteItem').modal('hide');
-    });
-</script>
-@endscript

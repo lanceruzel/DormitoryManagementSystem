@@ -14,6 +14,7 @@
                     <th>Name</th>
                     <th>Description</th>
                     <th>Quantity</th>
+                    <th>Stock Available</th>
                     <th>Unit Price</th>
                     <th>Action</th>
                 </tr>
@@ -23,8 +24,9 @@
                     <tr>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->description }}</td>
-                        <td>{{ $item->quantity }}</td>
-                        <td>{{ $item->unit_price }}</td>
+                        <td>x{{ $item->quantity }}</td>
+                        <td>x{{ $item->stock_available }}</td>
+                        <td>₱{{ $item->unit_price }}</td>
                         <td>
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 </i> Modify

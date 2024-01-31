@@ -23,3 +23,17 @@
         @include('admin-tabs.inventory-item')
     @endif
 </div>
+
+@script
+<script>
+    $('#modal_addEditItem').on('hidden.bs.modal', function (e) {
+        $wire.dispatch('reset-form');
+    });
+
+    //Hide modal when successfully updated student or added
+    $wire.on('close-add-edit-delete-modal', () => {
+        $('#modal_addEditItem').modal('hide');
+        $('#modal_deleteItem').modal('hide');
+    });
+</script>
+@endscript
