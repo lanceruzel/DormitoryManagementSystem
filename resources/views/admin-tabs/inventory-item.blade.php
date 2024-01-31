@@ -2,7 +2,7 @@
     <div class="w-100 d-flex align-items-center justify-content-between">
         <h4 class="fw-bold py-3 mb-4">Inventory Item</h4>
 
-        <button class="btn btn-primary h-auto" data-bs-toggle="modal" data-bs-target="#modal_addItem">
+        <button class="btn btn-primary h-auto" data-bs-toggle="modal" data-bs-target="#modal_addEditItem">
             <i class="bx bx-plus"></i>Add Item
         </button>
     </div>
