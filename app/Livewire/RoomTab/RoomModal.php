@@ -145,17 +145,15 @@ class RoomModal extends Component implements ModalCrud
         return InventoryItem::orderBy('name', 'DESC')->get();
     }
 
+    #[On('selected-amenities-changed')]
     #[Computed()]
     public function amenities(){
-        if(!empty($this->selectedAmenities)){
-            return InventoryItem::whereIn('id', $this->selectedAmenities)->get();
-        }else{
-            return [];
-        }
+        $amenitiesInformation = InventoryItem::all();
+        $this->dispatch('amenitiesList', ['amenities' => $amenitiesInformation]);
+        return $amenitiesInformation;
     }
 
-    public function render()
-    {
+    public function render(){
         return view('livewire.RoomTab.room-modal');
     }
 }

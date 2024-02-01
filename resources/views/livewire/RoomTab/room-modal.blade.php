@@ -70,20 +70,112 @@
     </div>
 </div>
 
-
 @script
 <script>
+    selectedAmenitiesList = []; //amenities
+    selectedIDs = []; //
+
     $(document).ready(function(){
         $('#amenities-selection').select2({
             placeholder: 'Select one of the following',
-            dropdownParent: $("#modal_addEditItem")
+            dropdownParent: $("#modal_addEditItem"),
+            allowClear: true,
         });
 
         $('#amenities-selection').on('change', function(){
+            $wire.dispatch('selected-amenities-changed');
             let data = $(this).val();
-            console.log(data);
-            $wire.set('selectedAmenities', data);
+            selectedIDs = data;
         });
+
+        $wire.on('amenitiesList', (event) => {
+            let amenities = event[0].amenities;
+
+            //Check if the ids still exists on the container and if not then remove it
+            selectedAmenitiesList = selectedAmenitiesList.filter(item =>
+                selectedIDs.includes(String(item.inventoryItemID))
+            );
+
+            //Check if item is existing on the container and if not push the item
+            $.each(amenities, function(key, value){
+                if(selectedIDs.includes(String(value.id)) && !selectedAmenitiesList.some(item => item.inventoryItemID == value.id)){
+                    selectedAmenitiesList.push({
+                        'name': value.name,
+                        'inventoryItemID': value.id,
+                        'available': value.stock_available,
+                        'quantity_used': 1
+                    });
+                }
+            });
+
+            console.log(selectedAmenitiesList)
+            displaySelectedAmenities();
+        });
+
+        $('#modal_addEditItem').on('hidden.bs.modal', function (e) {
+            selectedAmenitiesList = [];
+            $('#amenities-selection').val(null).trigger('change');
+        });
+
+        function displaySelectedAmenities(){
+            let tableRows = '';
+
+            $.each(selectedAmenitiesList, function(key, value){
+                const { name, inventoryItemID, available, quantity_used } = value;
+
+                const html = `
+                <tr>
+                    <td class="text-center">${ name }</td>
+                    <td class="text-center">x${ available }</td>
+                    <td class="text-center">x<span id="item-count-${ inventoryItemID }">${ quantity_used }</span></td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-secondary btn-sm" onClick="minus_count(${ inventoryItemID })">
+                            <i class='bx bx-minus'></i>
+                        </button>
+
+                        <button type="button" class="btn btn-primary btn-sm" onClick="add_count(${ inventoryItemID })">
+                            <i class='bx bx-plus'></i>
+                        </button>
+                    </td>
+                </tr>
+                `;
+
+                tableRows += html;
+            });
+
+            $('#selected-amenities-table-container').html(tableRows);
+        }
     });
+
 </script>
 @endscript
+
+<script>
+    function add_count(id){
+        $.each(selectedAmenitiesList, function(key, value){
+            if(value.inventoryItemID == id){
+                let available = value.available;
+                let quantity = value.quantity_used;
+
+                if(quantity < available){
+                    selectedAmenitiesList[key].quantity_used++;
+                    $('#item-count-' + id).text(selectedAmenitiesList[key].quantity_used);
+                }
+            }
+        });
+    }
+
+    function minus_count(id){
+        $.each(selectedAmenitiesList, function(key, value){
+            if(value.inventoryItemID == id){
+                let available = value.available;
+                let quantity = value.quantity_used;
+
+                if(quantity >= 2){
+                    selectedAmenitiesList[key].quantity_used--;
+                    $('#item-count-' + id).text(selectedAmenitiesList[key].quantity_used);
+                }
+            }
+        });
+    }
+</script>

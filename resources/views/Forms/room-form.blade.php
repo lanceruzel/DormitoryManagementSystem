@@ -92,23 +92,8 @@
                 <th class="text-center">Action</th>
             </tr>
         </thead>
-        <tbody>
-            @foreach ($this->amenities as $item)
-                <tr>
-                    <td class="text-center">{{ $item->name }}</td>
-                    <td class="text-center">{{ $item->stock_available }}</td>
-                    <td class="text-center">x1</td>
-                    <td class="text-center">
-                        <button class="btn btn-secondary btn-sm">
-                            <i class='bx bx-minus'></i>
-                        </button>
-
-                        <button class="btn btn-primary btn-sm">
-                            <i class='bx bx-plus'></i>
-                        </button>
-                    </td>
-                </tr>
-            @endforeach
+        <tbody wire:ignore id="selected-amenities-table-container">
+            
         </tbody>
     </table>
 </div>
