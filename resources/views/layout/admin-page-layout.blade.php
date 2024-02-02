@@ -135,6 +135,11 @@
                     $('#toast-danger-message').text(getToastMessage);
                     new bootstrap.Toast($('#toast-danger')).show();
                 }
+
+                if (getToastMode === 'warning') {
+                    $('#toast-warning-message').text(getToastMessage);
+                    new bootstrap.Toast($('#toast-danger')).show();
+                }
             });
         });
     </script>

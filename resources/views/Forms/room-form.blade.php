@@ -38,6 +38,7 @@
         <label for="nameBasic" class="form-label">Status</label>
 
         <select wire:model='status' class="form-select @error('status') is-invalid @enderror">
+            <option value="" disabled selected>Select Status</option>
             <option value="available" selected>Available</option>
             <option value="unavailable">Unavailable</option>
             <option value="under maintenance">Under Maintenance</option>

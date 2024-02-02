@@ -13,7 +13,7 @@
                 </div>
 
                     <div class="modal-body">
-                        <form wire:submit="storeItem">
+                        <form wire:submit="prepareStore" id="room-modal-form">
                                 @include('Forms.room-form')
                     </div>
 
@@ -88,7 +88,7 @@
             selectedIDs = data;
         });
 
-        $wire.on('amenitiesList', (event) => {
+        $wire.on('getAmenitiesList', (event) => {
             let amenities = event[0].amenities;
 
             //Check if the ids still exists on the container and if not then remove it
@@ -108,13 +108,41 @@
                 }
             });
 
-            console.log(selectedAmenitiesList)
+            //console.log(selectedAmenitiesList)
             displaySelectedAmenities();
         });
 
         $('#modal_addEditItem').on('hidden.bs.modal', function (e) {
             selectedAmenitiesList = [];
             $('#amenities-selection').val(null).trigger('change');
+        });
+
+        $wire.on('get-selected-amenities', (event) => {
+            //Throw to php the selected amenities
+            $wire.dispatch('retrieved-amenities-list', { selectedAmenities: selectedAmenitiesList });
+        });
+
+        $wire.on('room-stored-amenities', (event) => {
+            //let amenities = event[0].amenities;
+            //console.log(event[0][0]['id']);
+
+            let selectIDs = [];
+
+            $.each(event[0], function(key, value){
+                selectedAmenitiesList.push({
+                        'name': value.name,
+                        'inventoryItemID': value.inventoryItemID,
+                        'available': value.stock_available,
+                        'quantity_used': value.quantity_used
+                    });
+
+                selectIDs.push(value.inventoryItemID);
+                //console.log(value.inventoryItemID)
+            });
+
+            $('#amenities-selection').val(selectIDs); 
+            $('#amenities-selection').trigger('change'); 
+            //console.log(event[0]);
         });
 
         function displaySelectedAmenities(){
@@ -146,7 +174,6 @@
             $('#selected-amenities-table-container').html(tableRows);
         }
     });
-
 </script>
 @endscript
 

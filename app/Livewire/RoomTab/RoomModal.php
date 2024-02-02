@@ -5,7 +5,9 @@ namespace App\Livewire\RoomTab;
 use App\Interfaces\ModalCrud;
 use App\Models\InventoryItem;
 use App\Models\Room;
+use App\Models\RoomInventoryItem;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
@@ -44,9 +46,32 @@ class RoomModal extends Component implements ModalCrud
             $this->comfort_room = $item[0]['comfort_room'];
             $this->status = $item[0]['status'];
         }
+
+        $roomInventory = $roomInventory = RoomInventoryItem::join('inventory_item', 'room_inventory_item.inventoryItemID', '=', 'inventory_item.id')
+        ->where('room_inventory_item.roomID', $id)
+        ->select(
+            'room_inventory_item.id',
+            'room_inventory_item.roomID',
+            'room_inventory_item.inventoryItemID',
+            'room_inventory_item.quantity_used',
+            'inventory_item.name',
+            'inventory_item.description',
+            'inventory_item.quantity',
+            'inventory_item.stock_available',
+            'inventory_item.unit_price'
+        )->get();
+
+        if($roomInventory){
+            $this->dispatch('room-stored-amenities', $roomInventory);
+        }
+    }
+
+    public function prepareStore(){
+        $this->dispatch('get-selected-amenities');
     }
 
     public function storeItem(){
+
         $validated = $this->validate();
 
         try{
@@ -78,13 +103,25 @@ class RoomModal extends Component implements ModalCrud
             );
 
             if($itemCreateUpdate){
-                $this->dispatch('showToast', [
-                    'mode' => 'success' ,
-                    'message' => 'Item successfully Updated/Created.'
-                ]);
+                $roomID = $itemCreateUpdate->id;
 
-                $this->dispatch('room-created');
-                $this->dispatch('close-add-edit-delete-modal');
+                if($this->roomInventoryUpdateCreate($roomID, $this->selectedAmenities)){
+                    $this->dispatch('showToast', [
+                        'mode' => 'success' ,
+                        'message' => 'Item successfully Updated/Created.'
+                    ]);
+    
+                    $this->dispatch('room-created');
+                    $this->dispatch('close-add-edit-delete-modal');
+                }else{
+                    $this->dispatch('showToast', [
+                        'mode' => 'warning' ,
+                        'message' => 'Item successfully Updated/Created. But room amenities are not successfully inserted.'
+                    ]);
+    
+                    $this->dispatch('room-created');
+                    $this->dispatch('close-add-edit-delete-modal');
+                }
             }else{
                 $this->dispatch('showToast', [
                     'mode' => 'danger' ,
@@ -94,6 +131,37 @@ class RoomModal extends Component implements ModalCrud
         }catch(Exception $e){
             dump($e->getMessage());
         }
+    }
+
+    public function roomInventoryUpdateCreate($roomID, $selectedAmenities){
+        
+        foreach ($selectedAmenities as $item) {
+            RoomInventoryItem::updateOrCreate(
+                [
+                    //Check first if these values are equal and if true just update the quantity_used and if not create instead
+                    'roomID' => $roomID,
+                    'inventoryItemID' => $item['inventoryItemID']
+                ],
+                [
+                    'quantity_used' => $item['quantity_used']
+                ]
+            );
+        }
+
+        //Delete rows not in selectedAmenities
+        $existingInventoryItemIDs = array_column($this->selectedAmenities, 'inventoryItemID');
+        RoomInventoryItem::where('roomID', $roomID)
+            ->whereNotIn('inventoryItemID', $existingInventoryItemIDs)
+            ->delete();
+
+        return true;
+    }
+
+    #[On('retrieved-amenities-list')]
+    public function getSelectedAmenities($selectedAmenities){
+        $this->selectedAmenities = $selectedAmenities;
+
+        $this->storeItem();
     }
 
     #[On('reset-form')]
@@ -149,7 +217,7 @@ class RoomModal extends Component implements ModalCrud
     #[Computed()]
     public function amenities(){
         $amenitiesInformation = InventoryItem::all();
-        $this->dispatch('amenitiesList', ['amenities' => $amenitiesInformation]);
+        $this->dispatch('getAmenitiesList', ['amenities' => $amenitiesInformation]);
         return $amenitiesInformation;
     }
 
