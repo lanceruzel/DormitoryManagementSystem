@@ -75,7 +75,7 @@
     <div wire:ignore class="col mb-3 d-flex flex-column">
         <label for="nameBasic" class="form-label">Ammenities</label>
 
-        <select wire:model='selectedAmenities' class="form-select" name="states[]" multiple="multiple" id="amenities-selection">
+        <select wire:ignore wire:model='selectedAmenities' class="form-select" name="states[]" multiple="multiple" id="amenities-selection">
             @foreach ($this->selectOptionItems() as $select)
                 <option value="{{ $select->id }}">{{ $select->name }}</option>
             @endforeach
