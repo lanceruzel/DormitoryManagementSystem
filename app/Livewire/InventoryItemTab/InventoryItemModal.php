@@ -4,6 +4,7 @@ namespace App\Livewire\InventoryItemTab;
 
 use App\Interfaces\ModalCrud;
 use App\Models\InventoryItem;
+use App\Models\RoomInventoryItem;
 use Exception;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
@@ -42,6 +43,19 @@ class InventoryItemModal extends Component implements ModalCrud
         $validated = $this->validate();
 
         try{
+            if($this->id){
+                $stockAvailable = RoomInventoryItem::where('inventoryItemID', $this->id)->sum('quantity_used');
+
+                if($this->quantity < $stockAvailable){
+                    $this->dispatch('showToast', [
+                        'mode' => 'danger' ,
+                        'message' => 'Please unassign this items first from the rooms before reducing the stock.'
+                    ]);
+                    
+                    return;
+                }
+            }
+
             $checkIfExisting = InventoryItem::where('name', $validated['name'])
                             ->where('id', '<>', $this->id)
                             ->first();

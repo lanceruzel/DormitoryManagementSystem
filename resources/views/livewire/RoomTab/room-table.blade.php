@@ -42,7 +42,7 @@
                             @endif
                         </td>
                         <td class="text-center">{{ $item->room_capacity }}</td>
-                        <td class="text-center">₱{{ $item->room_rate }}</td>
+                        <td class="text-center">₱{{ number_format($item->room_rate, 2) }}</td>
                         <td>
                             <ul>
                                 @if (count($item->items) === 0)

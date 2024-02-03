@@ -39,10 +39,17 @@
             </a>
         </li>
 
+        <li class="menu-item @if (request()->routeIS('admin-inventory')) active @endif">
+            <a href="{{ route('admin-inventory') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Inventory Item</div>
+            </a>
+        </li>
+
         <li class="menu-item @if (request()->routeIS('admin-maintenance')) active @endif">
             <a href="{{ route('admin-maintenance') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">Maintenance Management</div>
+                <div data-i18n="Basic">Maintenance Request</div>
             </a>
         </li>
 
@@ -50,13 +57,6 @@
             <a href="{{ route('admin-bill') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Bill Management</div>
-            </a>
-        </li>
-
-        <li class="menu-item @if (request()->routeIS('admin-inventory')) active @endif">
-            <a href="{{ route('admin-inventory') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">Inventory Item</div>
             </a>
         </li>
 

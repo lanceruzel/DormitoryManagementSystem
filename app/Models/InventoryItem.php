@@ -18,4 +18,8 @@ class InventoryItem extends Model
         'unit_price',
         'stock_available',
     ];
+
+    public function roomInventoryItems(){
+        return $this->hasMany(RoomInventoryItem::class, 'roomID');
+    }
 }

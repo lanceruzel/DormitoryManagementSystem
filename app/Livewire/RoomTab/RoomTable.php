@@ -53,9 +53,7 @@ class RoomTable extends Component implements Table
 
             $room->students = $studentItems;
         }
-
         
-        $this->dispatch('rooms-details', $rooms);
         return $rooms;
     }
 

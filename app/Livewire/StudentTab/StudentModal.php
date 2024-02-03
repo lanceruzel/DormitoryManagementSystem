@@ -181,6 +181,7 @@ class StudentModal extends Component
         ]);
 
         $this->id = '';
+        $this->assigned_room = 0;
 
         $this->resetErrorBag();
     }
