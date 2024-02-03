@@ -99,11 +99,3 @@
         </div>
     </div>
 </div>
-
-@script
-<script>
-    $wire.on('rooms-details', (event) => {
-        console.log(event);
-    });
-</script>
-@endscript

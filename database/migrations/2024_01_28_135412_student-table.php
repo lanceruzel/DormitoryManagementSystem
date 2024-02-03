@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('email');
             $table->string('contact');
-            $table->binary('image');
+            $table->binary('image')->nullable();
             $table->string('e_fullname');
             $table->string('e_contact');
             $table->string('e_address');
@@ -29,8 +29,8 @@ return new class extends Migration
             $table->string('s_id');
             $table->string('s_college');
             $table->string('s_program');
-            $table->binary('s_cors');
-            $table->string('assigned_room')->constrained('rooms');;
+            $table->binary('s_cors')->nullable();
+            $table->string('assigned_room')->default('0');;
             $table->timestamps();
         });
     }
