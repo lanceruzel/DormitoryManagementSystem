@@ -45,21 +45,31 @@
                         <td class="text-center">₱{{ $item->room_rate }}</td>
                         <td>
                             <ul>
-                                @foreach ($item->items as $inventory_item)
-                                    <li class="form-check">
-                                        <input class="form-check-input" type="checkbox" checked onclick="return false;">
-                                        <label class="form-check-label">
-                                            x{{ $inventory_item['quantity_used'] . ' ' . $inventory_item['inventory_item_name'] }}
-                                        </label>
-                                    </li>
-                                @endforeach
+                                @if (count($item->items) === 0)
+                                    <p>No amenity assigned to this room</p>
+                                @else
+                                    @foreach ($item->items as $inventory_item)
+                                        <li class="form-check">
+                                            <input class="form-check-input" type="checkbox" checked onclick="return false;">
+                                            <label class="form-check-label">
+                                                x{{ $inventory_item['quantity_used'] . ' ' . $inventory_item['inventory_item_name'] }}
+                                            </label>
+                                        </li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </td>
                         <td>
                             <ul>
-                                @foreach ($item->students as $student)
-                                    <li>{{ $student['name'] }}</li>
-                                @endforeach
+                                @if (count($item->students) === 0)
+                                    <p>No students assigned to this room</p>
+                                @else
+                                    <ul>
+                                        @foreach ($item->students as $student)
+                                            <li>{{ $student['name'] }}</li>
+                                        @endforeach
+                                    </ul>
+                                @endif
                             </ul>
                         </td>
                         <td>
