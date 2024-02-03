@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->integer('quantity');
-            $table->integer('stock_available');
+            $table->integer('total_stock');
             $table->integer('unit_price');
             $table->timestamps();
         });

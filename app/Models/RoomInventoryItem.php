@@ -16,4 +16,8 @@ class RoomInventoryItem extends Model
         'inventoryItemID',
         'quantity_used',
     ];
+
+    public function inventoryItem(){
+        return $this->belongsTo(InventoryItem::class, 'inventoryItemID');
+    }
 }

@@ -18,4 +18,12 @@ class Room extends Model
         'comfort_room',
         'status',
     ];
+
+    public function roomInventoryItems(){
+        return $this->hasMany(RoomInventoryItem::class, 'roomID');
+    }
+
+    public function students(){
+        return $this->hasMany(Student::class, 'assigned_room');
+    }
 }

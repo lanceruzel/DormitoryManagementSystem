@@ -22,8 +22,6 @@ class InventoryItemModal extends Component implements ModalCrud
     #[Rule('required')]
     public $quantity = '';
 
-    public $stock_available = '';
-
     #[Rule('required|min:1')]
     public $unit_price = '';
 
@@ -37,7 +35,6 @@ class InventoryItemModal extends Component implements ModalCrud
             $this->description = $item[0]['description'];
             $this->quantity = $item[0]['quantity'];
             $this->unit_price = $item[0]['unit_price'];
-            $this->stock_available = $item[0]['stock_available'];
         }
     }
 
@@ -58,7 +55,6 @@ class InventoryItemModal extends Component implements ModalCrud
                 'name' => $validated['name'],
                 'description' => $validated['description'],
                 'quantity' => $validated['quantity'],
-                'stock_available' => $validated['quantity'],
                 'unit_price' => $validated['unit_price'],
             ];
 

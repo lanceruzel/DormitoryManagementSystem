@@ -25,7 +25,6 @@
                 @foreach ($this->tableItems as $item)
                     <tr>
                         <td>{{ $item->room_name }}</td>            
-                        </td>
                         <td>
                             @if($item->status === 'available')
                                 <span class="badge bg-label-success">Available</span>
@@ -46,39 +45,21 @@
                         <td class="text-center">₱{{ $item->room_rate }}</td>
                         <td>
                             <ul>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" checked onclick="return false;">
-                                    <label class="form-check-label">
-                                        Aircon
-                                    </label>
-                                </li>
-
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" checked onclick="return false;">
-                                    <label class="form-check-label">
-                                        2x Comfort Room
-                                    </label>
-                                </li>
-
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" checked onclick="return false;">
-                                    <label class="form-check-label">
-                                        Electric Fan
-                                    </label>
-                                </li>
-
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" checked onclick="return false;">
-                                    <label class="form-check-label">
-                                        Water Dispenser
-                                    </label>
-                                </li>
+                                @foreach ($item->items as $inventory_item)
+                                    <li class="form-check">
+                                        <input class="form-check-input" type="checkbox" checked onclick="return false;">
+                                        <label class="form-check-label">
+                                            x{{ $inventory_item['quantity_used'] . ' ' . $inventory_item['inventory_item_name'] }}
+                                        </label>
+                                    </li>
+                                @endforeach
                             </ul>
                         </td>
                         <td>
                             <ul>
-                                <li>Juan Dela Cruz</li>
-                                <li>Palbo Escobar</li>
+                                @foreach ($item->students as $student)
+                                    <li>{{ $student['name'] }}</li>
+                                @endforeach
                             </ul>
                         </td>
                         <td>
@@ -108,3 +89,11 @@
         </div>
     </div>
 </div>
+
+@script
+<script>
+    $wire.on('rooms-details', (event) => {
+        console.log(event);
+    });
+</script>
+@endscript

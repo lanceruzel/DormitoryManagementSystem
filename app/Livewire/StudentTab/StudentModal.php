@@ -2,8 +2,10 @@
 
 namespace App\Livewire\StudentTab;
 
+use App\Models\Room;
 use App\Models\Student;
 use Exception;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
@@ -210,6 +212,11 @@ class StudentModal extends Component
         }catch(Exception $e){
             dump($e->getMessage());
         }
+    }
+
+    #[Computed()]
+    public function rooms(){
+        return Room::orderBy('room_name', 'DESC')->get();
     }
 
     public function render()

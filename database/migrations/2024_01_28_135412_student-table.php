@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('s_college');
             $table->string('s_program');
             $table->binary('s_cors');
-            $table->string('assigned_room');
+            $table->string('assigned_room')->constrained('rooms');;
             $table->timestamps();
         });
     }

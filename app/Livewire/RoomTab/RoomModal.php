@@ -48,6 +48,9 @@ class RoomModal extends Component implements ModalCrud
         }
 
         $roomInventory = $roomInventory = RoomInventoryItem::join('inventory_item', 'room_inventory_item.inventoryItemID', '=', 'inventory_item.id')
+        ->leftJoin(DB::raw('(SELECT inventoryItemID, SUM(quantity_used) as total_used FROM room_inventory_item GROUP BY inventoryItemID) as subquery'), function ($join) {
+            $join->on('room_inventory_item.inventoryItemID', '=', 'subquery.inventoryItemID');
+        })
         ->where('room_inventory_item.roomID', $id)
         ->select(
             'room_inventory_item.id',
@@ -57,9 +60,10 @@ class RoomModal extends Component implements ModalCrud
             'inventory_item.name',
             'inventory_item.description',
             'inventory_item.quantity',
-            'inventory_item.stock_available',
-            'inventory_item.unit_price'
-        )->get();
+            'inventory_item.unit_price',
+            DB::raw('COALESCE(inventory_item.quantity - COALESCE(subquery.total_used, 0), 0) as stock_available')
+        )
+        ->get();
 
         if($roomInventory){
             $this->dispatch('room-stored-amenities', $roomInventory);
@@ -217,6 +221,13 @@ class RoomModal extends Component implements ModalCrud
     #[Computed()]
     public function amenities(){
         $amenitiesInformation = InventoryItem::all();
+
+        $amenitiesInformation->map(function ($item) {
+            $totalUsed = RoomInventoryItem::where('inventoryItemID', $item->id)->sum('quantity_used');
+            $item->stock_available = max($item->quantity - $totalUsed, 0);
+            return $item;
+        });
+
         $this->dispatch('getAmenitiesList', ['amenities' => $amenitiesInformation]);
         return $amenitiesInformation;
     }

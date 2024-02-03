@@ -15,7 +15,7 @@ class InventoryItem extends Model
         'name',
         'description',
         'quantity',
-        'stock_available',
         'unit_price',
+        'stock_available',
     ];
 }

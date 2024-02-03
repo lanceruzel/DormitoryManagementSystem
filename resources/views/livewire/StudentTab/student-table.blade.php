@@ -26,7 +26,7 @@
                         <td>{{ $student->email }}</td>
                         <td>{{ $student->gender }}</td>
                         <td>{{ $student->contact }}</td>
-                        <td>{{ $student->assigned_room }}</td>
+                        <td>{{ $student->room->room_name }}</td>
                         <td>
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 </i> Modify

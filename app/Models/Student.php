@@ -31,4 +31,8 @@ class Student extends Model
         's_cor',
         'assigned_room',
     ];
+
+    public function room(){
+        return $this->belongsTo(Room::class, 'assigned_room');
+    }
 }

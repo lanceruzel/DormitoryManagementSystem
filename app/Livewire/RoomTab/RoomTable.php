@@ -25,11 +25,38 @@ class RoomTable extends Component implements Table
 
     #[Computed()]
     public function tableItems(){
-        return Room::where(function ($query) {
+        $rooms = Room::with(['roomInventoryItems.inventoryItem'])->where(function ($query) {
             $query->where('room_name', 'like', "%{$this->search}%");
         })
         ->orderBy('id', 'DESC')
         ->paginate(10);
+
+        foreach ($rooms as $room) {
+            $roomItems = [];
+
+            foreach ($room->roomInventoryItems as $roomInventoryItem) {
+                $roomItems[] = [
+                    'room_id' => $room->id,
+                    'inventory_item_name' => $roomInventoryItem->inventoryItem->name,
+                    'quantity_used' => $roomInventoryItem->quantity_used
+                ];
+            }
+
+            $room->items = $roomItems;
+
+            $studentItems = [];
+            foreach ($room->students as $student) {
+                $studentItems[] = [
+                    'name' => $student->first_name . ' ' . $student->last_name,
+                ];
+            }
+
+            $room->students = $studentItems;
+        }
+
+        
+        $this->dispatch('rooms-details', $rooms);
+        return $rooms;
     }
 
     #[On('room-created')]

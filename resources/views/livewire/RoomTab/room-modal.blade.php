@@ -102,13 +102,13 @@
                     selectedAmenitiesList.push({
                         'name': value.name,
                         'inventoryItemID': value.id,
-                        'available': value.stock_available,
+                        'stock_available': value.stock_available,
                         'quantity_used': 1
                     });
                 }
+                
             });
-
-            //console.log(selectedAmenitiesList)
+            
             displaySelectedAmenities();
         });
 
@@ -132,12 +132,12 @@
                 selectedAmenitiesList.push({
                         'name': value.name,
                         'inventoryItemID': value.inventoryItemID,
-                        'available': value.stock_available,
-                        'quantity_used': value.quantity_used
+                        'quantity_used': value.quantity_used,
+                        'stock_available': value.stock_available,
                     });
 
                 selectIDs.push(value.inventoryItemID);
-                //console.log(value.inventoryItemID)
+                //console.log(selectedAmenitiesList)
             });
 
             $('#amenities-selection').val(selectIDs); 
@@ -149,12 +149,12 @@
             let tableRows = '';
 
             $.each(selectedAmenitiesList, function(key, value){
-                const { name, inventoryItemID, available, quantity_used } = value;
+                const { name, inventoryItemID, quantity_used, stock_available } = value;
 
                 const html = `
                 <tr>
                     <td class="text-center">${ name }</td>
-                    <td class="text-center">x${ available }</td>
+                    <td class="text-center">x<span id="item-available-${ inventoryItemID }">${ stock_available }</td>
                     <td class="text-center">x<span id="item-count-${ inventoryItemID }">${ quantity_used }</span></td>
                     <td class="text-center">
                         <button type="button" class="btn btn-secondary btn-sm" onClick="minus_count(${ inventoryItemID })">
@@ -181,12 +181,14 @@
     function add_count(id){
         $.each(selectedAmenitiesList, function(key, value){
             if(value.inventoryItemID == id){
-                let available = value.available;
-                let quantity = value.quantity_used;
 
-                if(quantity < available){
+                if(value.stock_available >= 1){
                     selectedAmenitiesList[key].quantity_used++;
+                    selectedAmenitiesList[key].stock_available--;
+
                     $('#item-count-' + id).text(selectedAmenitiesList[key].quantity_used);
+                    $('#item-available-' + id).text(selectedAmenitiesList[key].stock_available);
+                    console.log('true')
                 }
             }
         });
@@ -195,12 +197,12 @@
     function minus_count(id){
         $.each(selectedAmenitiesList, function(key, value){
             if(value.inventoryItemID == id){
-                let available = value.available;
-                let quantity = value.quantity_used;
 
-                if(quantity >= 2){
+                if(value.quantity_used >= 2){
                     selectedAmenitiesList[key].quantity_used--;
+                    selectedAmenitiesList[key].stock_available++;
                     $('#item-count-' + id).text(selectedAmenitiesList[key].quantity_used);
+                    $('#item-available-' + id).text(selectedAmenitiesList[key].stock_available);
                 }
             }
         });

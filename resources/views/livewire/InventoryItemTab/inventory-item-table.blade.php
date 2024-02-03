@@ -13,7 +13,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
-                    <th>Quantity</th>
+                    <th>Stock Total</th>
                     <th>Stock Available</th>
                     <th>Unit Price</th>
                     <th>Action</th>
