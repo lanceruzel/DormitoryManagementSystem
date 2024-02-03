@@ -99,6 +99,16 @@ class StudentModal extends Component
         $validated = $this->validate();
 
         try{
+            if($this->assigned_room){
+                $roomCapacity = Room::where('id', $this->assigned_room)->pluck('room_capacity')->first();
+
+                $dormers = Student::where('assigned_room', $this->assigned_room)->count();
+
+                if($dormers >= $roomCapacity){
+                    return $this->addError('assigned_room', 'This room is already full. Please choose another room');
+                }
+            }
+
             $checkEmail = Student::where('email', $validated['email'])
                             ->where('id', '<>', $this->id)
                             ->first();

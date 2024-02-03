@@ -13,10 +13,10 @@
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
-                    <th>Stock Total</th>
-                    <th>Stock Available</th>
-                    <th>Unit Price</th>
-                    <th>Action</th>
+                    <th class="text-center">Stock Total</th>
+                    <th class="text-center">Stock Available</th>
+                    <th class="text-center">Unit Price</th>
+                    <th class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
@@ -24,10 +24,16 @@
                     <tr>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->description }}</td>
-                        <td>x{{ $item->quantity }}</td>
-                        <td>x{{ $item->stock_available }}</td>
-                        <td>₱{{ $item->unit_price }}</td>
-                        <td>
+                        <td class="text-center">x{{ $item->quantity }}</td>
+                        <td class="text-center">
+                            @if ($item->stock_available === 0)
+                                <span class="badge bg-label-warning">There are no stock left available</span>
+                            @else
+                                x{{ $item->stock_available }}
+                            @endif
+                        </td>
+                        <td class="text-center">₱{{ $item->unit_price }}</td>
+                        <td class="text-center">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 </i> Modify
                             </button>

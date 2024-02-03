@@ -12,20 +12,20 @@
             <thead>
                 <tr>
                     <th>Room Name</th>
-                    <th>Availability</th>
-                    <th>Own CR</th>
-                    <th>Capacity</th>
-                    <th>Rent Rate</th>
-                    <th>Amenities</th>
-                    <th>Assinged Students</th>
-                    <th>Actions</th>
+                    <th class="text-center">Availability</th>
+                    <th class="text-center">Own CR</th>
+                    <th class="text-center">Capacity</th>
+                    <th class="text-center">Rent Rate</th>
+                    <th class="text-center">Amenities</th>
+                    <th class="text-center">Assinged Students</th>
+                    <th class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
                 @foreach ($this->tableItems as $item)
                     <tr>
                         <td>{{ $item->room_name }}</td>            
-                        <td>
+                        <td class="text-center">
                             @if($item->status === 'available')
                                 <span class="badge bg-label-success">Available</span>
                             @elseif($item->status === 'under maintenance')
@@ -34,7 +34,7 @@
                                 <span class="badge bg-label-danger">Unavailable</span>
                             @endif
                         </td>
-                        <td>
+                        <td class="text-center">
                             @if($item->comfort_room == 1)
                                 <span class="badge bg-label-success">Yes</span>
                             @else
@@ -43,7 +43,7 @@
                         </td>
                         <td class="text-center">{{ $item->room_capacity }}</td>
                         <td class="text-center">₱{{ number_format($item->room_rate, 2) }}</td>
-                        <td>
+                        <td class="text-center">
                             <ul>
                                 @if (count($item->items) === 0)
                                     <p>No amenity assigned to this room</p>
@@ -59,7 +59,7 @@
                                 @endif
                             </ul>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <ul>
                                 @if (count($item->students) === 0)
                                     <p>No students assigned to this room</p>
@@ -72,7 +72,7 @@
                                 @endif
                             </ul>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="dropdown">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false">

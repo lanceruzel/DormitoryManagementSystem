@@ -47,12 +47,7 @@ class InventoryItemModal extends Component implements ModalCrud
                 $stockAvailable = RoomInventoryItem::where('inventoryItemID', $this->id)->sum('quantity_used');
 
                 if($this->quantity < $stockAvailable){
-                    $this->dispatch('showToast', [
-                        'mode' => 'danger' ,
-                        'message' => 'Please unassign this items first from the rooms before reducing the stock.'
-                    ]);
-                    
-                    return;
+                    return $this->addError('quantity', 'Please unassign this items first from the rooms before reducing the stock.');;
                 }
             }
 
