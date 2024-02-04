@@ -15,6 +15,19 @@ class InventoryItemTable extends Component implements Table{
 
     public $search = '';
 
+    public $sortDirection = 'DESC';
+    public $sortColumn = 'name';
+
+    public function doSort($column){
+        if($this->sortColumn === $column){
+            $this->sortDirection = ($this->sortDirection == 'ASC') ? 'DESC':'ASC';
+            return;
+        }
+
+        $this->sortColumn = $column;
+        $this->sortDirection = 'DESC';
+    }
+
     public function showSelectedItem($id){
         $this->dispatch('show-inventory-item', ['item-id' => $id]);
     }
@@ -25,19 +38,12 @@ class InventoryItemTable extends Component implements Table{
 
     #[Computed()]
     public function tableItems(){
-        $inventoryItems = InventoryItem::where(function ($query) {
-            $query->where('name', 'like', "%{$this->search}%");
-        })
-        ->orderBy('id', 'DESC')
+        $inventoryItems = InventoryItem::selectRaw('*, (quantity - COALESCE((SELECT SUM(quantity_used) FROM room_inventory_item WHERE inventoryItemID = inventory_item.id), 0)) as stock_available')
+        ->where('name', 'like', "%{$this->search}%")
+        ->orderBy($this->sortColumn, $this->sortDirection)
         ->paginate(10);
 
-        $inventoryItems->map(function ($item) {
-            $totalUsed = RoomInventoryItem::where('inventoryItemID', $item->id)->sum('quantity_used');
-            $item->stock_available = max($item->quantity - $totalUsed, 0);
-            return $item;
-        });
-
-        return $inventoryItems;
+    return $inventoryItems;
     }
 
     #[On('item-created')]

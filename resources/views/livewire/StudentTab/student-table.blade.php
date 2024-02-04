@@ -11,7 +11,7 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Full Name</th>
+                    <th wire:click="doSort('first_name')">Full Name <i class='bx bx-sort'></th>
                     <th>Email Address</th>
                     <th class="text-center">Gender</th>
                     <th class="text-center">Contact #</th>

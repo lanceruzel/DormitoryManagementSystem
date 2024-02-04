@@ -15,6 +15,19 @@ class StudentTable extends Component implements Table
 
     public $search = '';
 
+    public $sortDirection = 'DESC';
+    public $sortColumn = 'created_at';
+
+    public function doSort($column){
+        if($this->sortColumn === $column){
+            $this->sortDirection = ($this->sortDirection == 'ASC') ? 'DESC':'ASC';
+            return;
+        }
+
+        $this->sortColumn = $column;
+        $this->sortDirection = 'DESC';
+    }
+
     public function showSelectedItem($id){
         $this->dispatch('show-student', ['student-id' => $id]);
     }
@@ -32,7 +45,7 @@ class StudentTable extends Component implements Table
                 ->orWhere('contact', 'like', "%{$this->search}%")
                 ->orWhere('email', 'like', "%{$this->search}%");
         })
-        ->orderBy('id', 'DESC')
+        ->orderBy($this->sortColumn, $this->sortDirection)
         ->paginate(10);
     }
 

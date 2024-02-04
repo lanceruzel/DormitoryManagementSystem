@@ -25,7 +25,11 @@
 <div class="row">
     <div class="col-6 mb-3">
         <label for="nameBasic" class="form-label">Rental Rate</label>
-        <input wire:model='room_rate' type="number" inputmode="numeric" id="" class="form-control @error('room_rate') is-invalid @enderror" placeholder="Enter rate" />
+
+        <div class="input-group input-group-merge">
+            <span class="input-group-text">₱</span>
+            <input wire:model='room_rate' type="number" inputmode="numeric" id="" class="form-control @error('room_rate') is-invalid @enderror" placeholder="Enter rate" />
+        </div>
         
         <div class="invalid-feedback">
             @error('room_rate')

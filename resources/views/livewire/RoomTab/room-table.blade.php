@@ -11,11 +11,11 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Room Name</th>
+                    <th wire:click="doSort('room_name')">Room Name <i class='bx bx-sort'></th>
                     <th class="text-center">Availability</th>
                     <th class="text-center">Own CR</th>
-                    <th class="text-center">Capacity</th>
-                    <th class="text-center">Rent Rate</th>
+                    <th wire:click="doSort('room_capacity')" class="text-center">Capacity <i class='bx bx-sort'></th>
+                    <th wire:click="doSort('room_rate')" class="text-center">Rent Rate <i class='bx bx-sort'></th>
                     <th class="text-center">Amenities</th>
                     <th class="text-center">Assinged Students</th>
                     <th class="text-center">Actions</th>

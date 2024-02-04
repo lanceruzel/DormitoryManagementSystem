@@ -15,6 +15,19 @@ class RoomTable extends Component implements Table
 
     public $search = '';
 
+    public $sortDirection = 'DESC';
+    public $sortColumn = 'created_at';
+
+    public function doSort($column){
+        if($this->sortColumn === $column){
+            $this->sortDirection = ($this->sortDirection == 'ASC') ? 'DESC':'ASC';
+            return;
+        }
+
+        $this->sortColumn = $column;
+        $this->sortDirection = 'DESC';
+    }
+
     public function showSelectedItem($id){
         $this->dispatch('show-room', ['room-id' => $id]);
     }
@@ -28,7 +41,7 @@ class RoomTable extends Component implements Table
         $rooms = Room::with(['roomInventoryItems.inventoryItem'])->where(function ($query) {
             $query->where('room_name', 'like', "%{$this->search}%");
         })
-        ->orderBy('id', 'DESC')
+        ->orderBy($this->sortColumn, $this->sortDirection)
         ->paginate(10);
 
         foreach ($rooms as $room) {

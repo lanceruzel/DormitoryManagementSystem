@@ -11,11 +11,11 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Name</th>
+                    <th wire:click="doSort('name')">Name <i class='bx bx-sort'></th>
                     <th>Description</th>
-                    <th class="text-center">Stock Total</th>
-                    <th class="text-center">Stock Available</th>
-                    <th class="text-center">Unit Price</th>
+                    <th wire:click="doSort('quantity')" class="text-center">Stock Total <i class='bx bx-sort'></th>
+                    <th wire:click="doSort('stock_available')" class="text-center">Stock Available <i class='bx bx-sort'></th>
+                    <th wire:click="doSort('unit_price')" class="text-center">Unit Price <i class='bx bx-sort'></th>
                     <th class="text-center">Action</th>
                 </tr>
             </thead>
