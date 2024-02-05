@@ -13,6 +13,9 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
+
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Main</span></li>
+
         <!-- Dashboard -->
         <li class="menu-item @if (request()->routeIS('admin-dashboard')) active @endif">
             <a href="{{ route('admin-dashboard') }}" class="menu-link">
@@ -46,13 +49,6 @@
             </a>
         </li>
 
-        <li class="menu-item @if (request()->routeIS('admin-maintenance')) active @endif">
-            <a href="{{ route('admin-maintenance') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">Maintenance Request</div>
-            </a>
-        </li>
-
         <li class="menu-item @if (request()->routeIS('admin-bill')) active @endif">
             <a href="{{ route('admin-bill') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
@@ -61,7 +57,7 @@
         </li>
 
         <!-- Components -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Etc</span></li>
         <!-- Cards -->
         <li class="menu-item">
             <a href="javascript:void(0)" class="menu-link">

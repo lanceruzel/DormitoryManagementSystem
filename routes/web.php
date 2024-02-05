@@ -18,7 +18,6 @@ Route::get('/', AdminPage::class)->middleware('auth');
 Route::get('/dashboard', AdminPage::class)->middleware('auth')->name('admin-dashboard');
 Route::get('/room-management', AdminPage::class)->middleware('auth')->name('admin-room');
 Route::get('/student-management', AdminPage::class)->middleware('auth')->name('admin-student');
-Route::get('/maintenance-request', AdminPage::class)->middleware('auth')->name('admin-maintenance');
 Route::get('/bill-management', AdminPage::class)->middleware('auth')->name('admin-bill');
 Route::get('/inventory-item', AdminPage::class)->middleware('auth')->name('admin-inventory');
 

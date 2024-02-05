@@ -36,6 +36,10 @@ class StudentTable extends Component implements Table
         $this->dispatch('delete-student', ['student-id' => $id]);
     }
 
+    public function selectedStudentPaymentHistory($id){
+        $this->dispatch('payment-history-student', ['student-id' => $id]);
+    }
+
     #[Computed()]
     public function tableItems(){
         return Student::where(function ($query) {

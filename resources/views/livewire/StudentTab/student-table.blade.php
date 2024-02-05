@@ -20,27 +20,41 @@
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
-                @foreach ($this->tableItems as $student)
-                    <tr>
-                        <td>{{ $student->first_name . ' ' . $student->middle_name . ' ' . $student->last_name }}</td>
-                        <td>{{ $student->email }}</td>
-                        <td class="text-center">{{ $student->gender }}</td>
-                        <td class="text-center">{{ $student->contact }}</td>
-                        <td class="text-center">{{ $student->room->room_name }}</td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                </i> Modify
-                            </button>
-
-                            <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href="javascript:void(0);" wire:click='showSelectedItem({{ $student->id }})' data-bs-toggle="modal" data-bs-target="#modal_addEditItem">
-                                    <i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                <a class="dropdown-item" href="javascript:void(0);" wire:click='deleteSelectedItem({{ $student->id }})' data-bs-toggle="modal" data-bs-target="#modal_deleteItem">
-                                    <i class="bx bx-trash me-1"></i> Delete</a>
-                            </div>
+                @if(count($this->tableItems) === 0)
+                    <tr class="text-bg-secondary">
+                        <td colspan="4" class="text-center">
+                            <div class="alert alert-dark mb-0" role="alert">There are no record available</div>
                         </td>
                     </tr>
-                @endforeach
+
+                    <tr>
+                        <td colspan="4"></td>    
+                    </tr>
+                @else
+                    @foreach ($this->tableItems as $student)
+                        <tr>
+                            <td>{{ $student->first_name . ' ' . $student->middle_name . ' ' . $student->last_name }}</td>
+                            <td>{{ $student->email }}</td>
+                            <td class="text-center">{{ $student->gender }}</td>
+                            <td class="text-center">{{ $student->contact }}</td>
+                            <td class="text-center">{{ $student->room->room_name }}</td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    </i> Modify
+                                </button>
+
+                                <div class="dropdown-menu" style="">
+                                    <a class="dropdown-item" href="javascript:void(0);" wire:click='selectedStudentPaymentHistory({{ $student->id }})' data-bs-toggle="modal" data-bs-target="#modal_paymentHistory">
+                                        <i class="bx bx-edit-alt me-1"></i> View Payments</a>
+                                    <a class="dropdown-item" href="javascript:void(0);" wire:click='showSelectedItem({{ $student->id }})' data-bs-toggle="modal" data-bs-target="#modal_addEditItem">
+                                        <i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                    <a class="dropdown-item" href="javascript:void(0);" wire:click='deleteSelectedItem({{ $student->id }})' data-bs-toggle="modal" data-bs-target="#modal_deleteItem">
+                                        <i class="bx bx-trash me-1"></i> Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
             </tbody>
         </table>
     </div>

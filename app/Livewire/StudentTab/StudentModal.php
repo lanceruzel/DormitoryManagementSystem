@@ -2,6 +2,7 @@
 
 namespace App\Livewire\StudentTab;
 
+use App\Models\Bill;
 use App\Models\Room;
 use App\Models\Student;
 use Exception;
@@ -197,8 +198,14 @@ class StudentModal extends Component
     }
 
     #[On('delete-student')]
+    #[On('payment-history-student')]
     public function getItemID($id){
         $this->id = $id;
+    }
+
+    #[Computed()]
+    public function paymentHistory(){
+        return Bill::where('studentID', $this->id)->get();
     }
 
     public function deleteItem(){

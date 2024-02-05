@@ -21,34 +21,45 @@
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
-
-                @foreach ($this->tableItems as $item)
-                    <tr>
-                        <td>{{ $item->student->first_name . ' ' . $item->student->last_name }}</td>
-                        <td>{{ $item->student->room->room_name }}</td>
-                        <td>{{ date('F d, Y h:i a', strtotime($item->created_at)) }}</td>
-                        <td>{{ $item->type }}</td>
-                        <td>₱{{ number_format($item->amount, 2) }}</td>
-                        <td class="text-center">{{ $item->payment_method }}</td>
-                        <td>
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                </i> Actions
-                            </button>
-
-                            <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href="javascript:void(0);" wire:click='showSelectedItem({{ $item->id }})' data-bs-toggle="modal" data-bs-target="#modal_addEditItem">
-                                    <i class="bx bx-edit-alt me-1"></i>Send Receipt (Email)</a>
-                                <a class="dropdown-item" href="javascript:void(0);" wire:click='showSelectedItem({{ $item->id }})' data-bs-toggle="modal" data-bs-target="#modal_addEditItem">
-                                    <i class="bx bx-edit-alt me-1"></i>Send Receipt (SMS)</a>
-                                    
-                                <a class="dropdown-item" href="javascript:void(0);" wire:click='showSelectedItem({{ $item->id }})' data-bs-toggle="modal" data-bs-target="#modal_addEditItem">
-                                    <i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                <a class="dropdown-item" href="javascript:void(0);" wire:click='deleteSelectedItem({{ $item->id }})' data-bs-toggle="modal" data-bs-target="#modal_deleteItem">
-                                    <i class="bx bx-trash me-1"></i> Delete</a>
-                            </div>
+                @if(count($this->tableItems) === 0)
+                    <tr class="text-bg-secondary">
+                        <td colspan="4" class="text-center">
+                            <div class="alert alert-dark mb-0" role="alert">There are no record available</div>
                         </td>
                     </tr>
-                @endforeach
+
+                    <tr>
+                        <td colspan="4"></td>    
+                    </tr>
+                @else
+                    @foreach ($this->tableItems as $item)
+                        <tr>
+                            <td>{{ $item->student->first_name . ' ' . $item->student->last_name }}</td>
+                            <td>{{ $item->student->room->room_name }}</td>
+                            <td>{{ date('F d, Y h:i a', strtotime($item->created_at)) }}</td>
+                            <td>{{ $item->type }}</td>
+                            <td>₱{{ number_format($item->amount, 2) }}</td>
+                            <td class="text-center">{{ $item->payment_method }}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    </i> Actions
+                                </button>
+
+                                <div class="dropdown-menu" style="">
+                                    <a class="dropdown-item" href="javascript:void(0);" wire:click='showSelectedItem({{ $item->id }})' data-bs-toggle="modal" data-bs-target="#modal_addEditItem">
+                                        <i class="bx bx-edit-alt me-1"></i>Send Receipt (Email)</a>
+                                    <a class="dropdown-item" href="javascript:void(0);" wire:click='showSelectedItem({{ $item->id }})' data-bs-toggle="modal" data-bs-target="#modal_addEditItem">
+                                        <i class="bx bx-edit-alt me-1"></i>Send Receipt (SMS)</a>
+                                        
+                                    <a class="dropdown-item" href="javascript:void(0);" wire:click='showSelectedItem({{ $item->id }})' data-bs-toggle="modal" data-bs-target="#modal_addEditItem">
+                                        <i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                    <a class="dropdown-item" href="javascript:void(0);" wire:click='deleteSelectedItem({{ $item->id }})' data-bs-toggle="modal" data-bs-target="#modal_deleteItem">
+                                        <i class="bx bx-trash me-1"></i> Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
             </tbody>
         </table>
     </div>
