@@ -5,7 +5,9 @@ namespace App\Livewire\BillTab;
 use App\Interfaces\ModalCrud;
 use App\Models\Bill;
 use App\Models\Student;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
+use FPDF;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
@@ -26,6 +28,38 @@ class BillModal extends Component implements ModalCrud
 
     #[Rule('required')]
     public $amount = '';
+
+    //#[Rule('required')]
+    public $print_type = '';
+
+    //#[Rule('required')]
+    public $print_month = '';
+
+    public function print(){
+        $data = '';
+
+        if($this->print_type === 'All'){
+            $data = Bill::whereMonth('created_at', $this->print_month)->get();
+        }else{
+            $data = Bill::where('type', $this->print_type)
+            ->whereMonth('created_at', $this->print_month)
+            ->get();
+        }
+
+        $total = $data->sum('amount');
+
+        $bills = [
+            "bill" => $data,
+            "dateToday" => date("F d, Y h:i a"),
+            "total" => $total
+        ];
+
+        $pdf = Pdf::loadView('bill-pdf', $bills)->setOptions(['defaultFont' => 'sans-serif']);;
+
+        return response()->streamDownload(function() use($pdf){
+            echo $pdf->stream();
+        },'exported_bill.pdf');
+    }
 
     #[On('show-bill')]
     public function getSelectedItemInformation($id){

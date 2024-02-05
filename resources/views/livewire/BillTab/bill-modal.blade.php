@@ -39,6 +39,37 @@
         </div>
     </div>
 
+    <div wire:ignore.self class="modal fade" id="modal_print_bill_reports" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Print Options</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form wire:submit="print">
+                        @include('Forms.bill-print-form')
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary ms-2">
+                        <span wire:loading>
+                            <div class="spinner-border spinner-border-sm" role="status">
+                                <span class="visually-hidden"></span>
+                            </div>
+                            Loading....
+                        </span>
+                        
+                        <span wire:loading.remove>Print</span>
+                    </button>
+                </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+
     <div wire:ignore.self class="modal fade" id="modal_deleteItem" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
