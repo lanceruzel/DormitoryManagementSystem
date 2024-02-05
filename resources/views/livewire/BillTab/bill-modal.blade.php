@@ -68,3 +68,15 @@
         </div>
     </div>
 </div>
+
+@script
+<script>
+    $(document).ready(function() {
+        $('#student-selection').select2({
+            placeholder: 'Select...',
+            dropdownParent: $("#modal_addEditItem"),
+            allowClear: true,
+        });
+    });
+</script>
+@endscript

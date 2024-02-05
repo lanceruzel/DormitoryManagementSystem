@@ -76,7 +76,7 @@
     selectedIDs = []; //
 
     $(document).ready(function(){
-        $('#amenities-selection').select2({
+        $('amenities-selection').select2({
             placeholder: 'Select one of the following',
             dropdownParent: $("#modal_addEditItem"),
             allowClear: true,
