@@ -127,7 +127,7 @@ class InventoryItemModal extends Component implements ModalCrud
 
                 $this->dispatch('showToast', [
                     'mode' => 'success' ,
-                    'message' => 'Successfully Deleted.'
+                    'message' => 'Item successfully deleted.'
                 ]);
             }else{
                 $this->dispatch('showToast', [

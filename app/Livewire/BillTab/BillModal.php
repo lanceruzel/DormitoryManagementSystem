@@ -94,7 +94,7 @@ class BillModal extends Component implements ModalCrud
             if($billCreateUpdate){
                 $this->dispatch('showToast', [
                     'mode' => 'success' ,
-                    'message' => 'Successfully Updated/Created'
+                    'message' => 'Payment successfully inserted.'
                 ]);
 
                 $this->dispatch('bill-created');
@@ -102,7 +102,7 @@ class BillModal extends Component implements ModalCrud
             }else{
                 $this->dispatch('showToast', [
                     'mode' => 'danger' ,
-                    'message' => 'There seems to be a problem Updating/Creating this item.'
+                    'message' => 'There seems to be a problem inserting this payment.'
                 ]);
             }
         }catch(Exception $e){
@@ -140,12 +140,12 @@ class BillModal extends Component implements ModalCrud
 
                 $this->dispatch('showToast', [
                     'mode' => 'success' ,
-                    'message' => 'Successfully Deleted'
+                    'message' => 'Payment successfully deleted.'
                 ]);
             }else{
                 $this->dispatch('showToast', [
                     'mode' => 'danger' ,
-                    'message' => 'There seems to be a problem deleting this item.'
+                    'message' => 'There seems to be a problem deleting this payments.'
                 ]);
             }
         }catch(Exception $e){
