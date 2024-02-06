@@ -22,6 +22,10 @@
     @if(request()->routeIS('admin-inventory'))
         @include('admin-tabs.inventory-item')
     @endif
+
+    @if(request()->routeIS('admin-account'))
+        @include('admin-tabs.account-mangement')
+    @endif
 </div>
 
 @script

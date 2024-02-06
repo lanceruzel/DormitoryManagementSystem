@@ -4,7 +4,7 @@
 
         <div>
             <button class="btn btn-primary h-auto" data-bs-toggle="modal" data-bs-target="#modal_print_bill_reports">
-                <i class='bx bxs-printer me-1'></i>Print Reports
+                <i class='tf-icons bx bxs-file-pdf'></i>&nbsp; Export Payment Reports
             </button>
 
             <button class="btn btn-primary h-auto" data-bs-toggle="modal" data-bs-target="#modal_addEditItem">

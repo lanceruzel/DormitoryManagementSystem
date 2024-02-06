@@ -19,7 +19,7 @@
         <!-- Dashboard -->
         <li class="menu-item @if (request()->routeIS('admin-dashboard')) active @endif">
             <a href="{{ route('admin-dashboard') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <i class="menu-icon tf-icons bx bxs-home"></i>
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
         </li>
@@ -28,61 +28,39 @@
             <span class="menu-header-text">Management</span>
         </li>
 
+        <li class="menu-item @if (request()->routeIS('admin-account')) active @endif">
+            <a href="{{ route('admin-account') }}" class="menu-link">
+                <i class='menu-icon tf-icons bx bxs-user-account'></i>
+                <div data-i18n="Basic">Account Management</div>
+            </a>
+        </li>
+
         <li class="menu-item @if (request()->routeIS('admin-student')) active @endif">
             <a href="{{ route('admin-student') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <i class='menu-icon tf-icons bx bxs-user-detail'></i>
                 <div data-i18n="Basic">Student Management</div>
             </a>
         </li>
 
         <li class="menu-item @if (request()->routeIS('admin-room')) active @endif">
             <a href="{{ route('admin-room') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <i class="menu-icon tf-icons bx bxs-school"></i>
                 <div data-i18n="Basic">Room Management</div>
             </a>
         </li>
 
         <li class="menu-item @if (request()->routeIS('admin-inventory')) active @endif">
             <a href="{{ route('admin-inventory') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <i class="menu-icon tf-icons bx bxs-box"></i>
                 <div data-i18n="Basic">Inventory Item</div>
             </a>
         </li>
 
         <li class="menu-item @if (request()->routeIS('admin-bill')) active @endif">
             <a href="{{ route('admin-bill') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <i class='menu-icon tf-icons bx bxs-wallet' ></i>
                 <div data-i18n="Basic">Bill Management</div>
             </a>
-        </li>
-
-        <!-- Components -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Etc</span></li>
-        <!-- Cards -->
-        <li class="menu-item">
-            <a href="javascript:void(0)" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">Cards</div>
-            </a>
-        </li>
-        <!-- Extended components -->
-        <li class="menu-item">
-            <a href="javascript:void(0)" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-copy"></i>
-                <div data-i18n="Extended UI">Extended UI</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="extended-ui-perfect-scrollbar.html" class="menu-link">
-                        <div data-i18n="Perfect Scrollbar">Perfect scrollbar</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="extended-ui-text-divider.html" class="menu-link">
-                        <div data-i18n="Text Divider">Text Divider</div>
-                    </a>
-                </li>
-            </ul>
         </li>
     </ul>
 </aside>

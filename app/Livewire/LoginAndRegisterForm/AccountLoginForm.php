@@ -24,7 +24,7 @@ class AccountLoginForm extends Component
                 session()->regenerate();
                 return redirect()->route('admin-dashboard');
             }else{
-                session()->flash('fail', 'Account does not exists or your login credentials are wrong.');
+                session()->flash('fail', 'These credentials do not match our records.');
             }
         }catch(Exception $e){
             dump($e->getMessage());
