@@ -58,10 +58,35 @@
         <div class="tab-pane fade show active" id="navs-justified-student-info" role="tabpanel">
             <div class="row mb-md-3">
                 <div class="col-md-6 d-flex flex-column align-items-center mb-3 mb-md-0">
-                    <img src="https://dummyimage.com/200/000/fff" alt="..." class="img-thumbnail" height="200px"
-                        width="200px">
+                    
+                    @if($old_img)
+                        @if($image)
+                            <img src="{{ $image->temporaryUrl() }}" class="img-thumbnail" style="min-height: 200px; min-width: 200px; max-height: 200px; max-width: 200px;">
+                        @else
+                            <img src="{{ Storage::url($old_img) }}" class="img-thumbnail" style="min-height: 200px; min-width: 200px; max-height: 200px; max-width: 200px;">
+                        @endif
+                    @elseif($image)
+                        <img src="{{ $image->temporaryUrl() }}" class="img-thumbnail" style="min-height: 200px; min-width: 200px; max-height: 200px; max-width: 200px;">
+                    @endif
 
-                    <button class="btn btn-primary mt-2 w-100">Upload</button>
+                    @if($image == '' && $old_img == '')
+                        <img wire:ignore src="https://dummyimage.com/200/000/fff" alt="..." class="img-thumbnail" id="student-dp-preview" style="min-height: 200px; min-width: 200px; max-height: 200px; max-width: 200px;">
+                    @endif
+                    
+                    <input wire:model='image' type="file" class="form-control @error('image') is-invalid @enderror mt-2" accept="image/png, img/jpg" id="{{ $iteration }}">
+
+                    <span wire:loading wire:target='image'>
+                        <div class="spinner-border spinner-border-sm" role="status">
+                            <span class="visually-hidden"></span>
+                        </div>
+                        Loading....
+                    </span>
+
+                    <div class="invalid-feedback">
+                        @error('image')
+                            {{ $message }}
+                        @enderror
+                    </div>
                 </div>
 
                 <div class="col-md-6">
@@ -229,12 +254,33 @@
         <div class="tab-pane fade" id="navs-justified-school" role="tabpanel">
             <div class="row mb-3">
                 <div class="col-12 d-flex align-items-center justify-content-center flex-column">
-                    <img src="https://dummyimage.com/500x600/454545/fff" alt="..." class="img-thumbnail"
-                        height="600px" width="500px">
+                    @if($old_cor)
+                        @if($s_cor)
+                            <img src="{{ $s_cor->temporaryUrl() }}" class="img-thumbnail" style="min-height: 600px; max-height: 600px; max-width: 500px; max-width: 500px;">
+                        @else
+                            <img src="{{ Storage::url($old_cor) }}" class="img-thumbnail" style="min-height: 600px; max-height: 600px; max-width: 500px; max-width: 500px;">
+                        @endif
+                    @elseif($s_cor)
+                        <img src="{{ $s_cor->temporaryUrl() }}" class="img-thumbnail" style="min-height: 600px; max-height: 600px; max-width: 500px; max-width: 500px;">
+                    @endif
 
-                    <div>
-                        <button class="btn btn-outline-primary mt-2">View</button>
-                        <button class="btn btn-primary mt-2">Upload</button>
+                    @if($s_cor == '' && $old_cor == '')
+                        <img wire:ignore src="https://dummyimage.com/500x600/454545/fff" alt="..." class="img-thumbnail" id="student-dp-preview" style="min-height: 600px; max-height: 600px; max-width: 500px; max-width: 500px;">
+                    @endif
+                    
+                    <input wire:model='s_cor' type="file" class="form-control @error('s_cor') is-invalid @enderror mt-2" accept="image/png, img/jpg" id="{{ $iteration+2 }}">
+
+                    <span wire:loading wire:target='s_cor'>
+                        <div class="spinner-border spinner-border-sm" role="status">
+                            <span class="visually-hidden"></span>
+                        </div>
+                        Loading....
+                    </span>
+
+                    <div class="invalid-feedback">
+                        @error('image')
+                            {{ $message }}
+                        @enderror
                     </div>
                 </div>
             </div>
