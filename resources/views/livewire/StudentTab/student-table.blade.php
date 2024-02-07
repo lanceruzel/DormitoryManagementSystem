@@ -45,7 +45,7 @@
 
                                 <div class="dropdown-menu" style="">
                                     <a class="dropdown-item" href="javascript:void(0);" wire:click='selectedStudentPaymentHistory({{ $student->id }})' data-bs-toggle="modal" data-bs-target="#modal_paymentHistory">
-                                        <i class="bx bx-edit-alt me-1"></i> View Payments</a>
+                                        <i class="bx bx-money me-1"></i> View Payments</a>
                                     <a class="dropdown-item" href="javascript:void(0);" wire:click='showSelectedItem({{ $student->id }})' data-bs-toggle="modal" data-bs-target="#modal_addEditItem">
                                         <i class="bx bx-edit-alt me-1"></i> Edit</a>
                                     <a class="dropdown-item" href="javascript:void(0);" wire:click='deleteSelectedItem({{ $student->id }})' data-bs-toggle="modal" data-bs-target="#modal_deleteItem">

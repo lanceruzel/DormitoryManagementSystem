@@ -41,16 +41,6 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item" href="javascript:void(0);">
-                            <i class="bx bx-power-off me-2"></i>
-                            <span class="align-middle">Change Password</span>
-                        </a>
-
-                        <a class="dropdown-item" href="javascript:void(0);">
-                            <i class="bx bx-power-off me-2"></i>
-                            <span class="align-middle">Change Email</span>
-                        </a>
-
                         <a wire:click='logout' class="dropdown-item" href="javascript:void(0);">
                             <i class="bx bx-power-off me-2"></i>
                             <span class="align-middle">Log Out</span>

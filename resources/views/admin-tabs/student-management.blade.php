@@ -4,7 +4,7 @@
         <h4 class="fw-bold py-3 mb-4">Student Management</h4>
 
         <button class="btn btn-primary h-auto" data-bs-toggle="modal" data-bs-target="#modal_addEditItem">
-            <i class="bx bx-plus"></i>Add Student
+            <i class='tf-icons bx bxs-user-plus me-1 pb-1'></i>Add Student
         </button>
     </div>
 

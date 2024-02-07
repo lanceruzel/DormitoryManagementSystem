@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2024 at 07:49 PM
+-- Generation Time: Feb 06, 2024 at 07:59 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -34,7 +34,7 @@ CREATE TABLE `accounts` (
   `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -43,7 +43,31 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `first_name`, `last_name`, `email`, `email_verified_at`, `password`, `created_at`, `updated_at`) VALUES
-(2, 'Lance Ruzel', 'Ambrocio', 'lanceruzel2@gmail.com', NULL, '$2y$12$9tXUP48TKVsi.TKZSDMcZ.qlbSAI.zY59rUTrQ523NMn8CNx.csDC', NULL, NULL);
+(4, 'Lance Ruzel', 'Ambrocio', 'test123@gmail.com', NULL, '$2y$12$58SdbJNYXgyYIOlVnQLTiOJKmdSABl94zfWvuB4HdvqZkVPHW/CSu', '2024-02-06 09:48:58', '2024-02-06 10:58:28');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bills`
+--
+
+CREATE TABLE `bills` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `studentID` bigint(20) UNSIGNED NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `payment_method` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `bills`
+--
+
+INSERT INTO `bills` (`id`, `studentID`, `type`, `amount`, `payment_method`, `created_at`, `updated_at`) VALUES
+(3, 32, 'Monthly Rent', 500, 'GCash', '2024-02-04 07:03:43', '2024-02-04 07:04:00'),
+(4, 37, 'Maintenance', 500, 'GCash', '2024-02-04 07:14:52', '2024-02-04 07:15:04');
 
 -- --------------------------------------------------------
 
@@ -56,7 +80,6 @@ CREATE TABLE `inventory_item` (
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `stock_available` int(11) NOT NULL,
   `unit_price` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -66,9 +89,10 @@ CREATE TABLE `inventory_item` (
 -- Dumping data for table `inventory_item`
 --
 
-INSERT INTO `inventory_item` (`id`, `name`, `description`, `quantity`, `stock_available`, `unit_price`, `created_at`, `updated_at`) VALUES
-(7, 'Test123', 'test123', 3, 3, '45', '2024-01-31 07:54:08', '2024-01-31 07:54:08'),
-(8, 'Test2', 'fdsfdsffd', 9, 9, '5', '2024-01-31 23:57:25', '2024-02-01 00:39:18');
+INSERT INTO `inventory_item` (`id`, `name`, `description`, `quantity`, `unit_price`, `created_at`, `updated_at`) VALUES
+(7, 'Test123', 'test123', 6, '45', '2024-01-31 07:54:08', '2024-02-03 06:24:10'),
+(8, 'Test2', 'fdsfdsffd', 14, '5', '2024-01-31 23:57:25', '2024-02-04 08:17:17'),
+(9, 'Aircon', 'rewrew', 44, '10000', '2024-02-03 00:56:20', '2024-02-03 06:45:43');
 
 -- --------------------------------------------------------
 
@@ -92,7 +116,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2024_01_28_135412_student-table', 2),
 (4, '2024_01_29_160916_room-table', 3),
 (5, '2024_01_29_163627_inventory-item', 3),
-(6, '2024_01_29_164036_room_inventory_item', 3);
+(6, '2024_01_29_164036_room_inventory_item', 3),
+(7, '2024_02_03_161158_bills-table', 4);
 
 -- --------------------------------------------------------
 
@@ -136,7 +161,9 @@ CREATE TABLE `rooms` (
 
 INSERT INTO `rooms` (`id`, `room_name`, `room_capacity`, `room_rate`, `comfort_room`, `status`, `created_at`, `updated_at`) VALUES
 (30, 'Room 15r', 3, 10000, 1, 'available', '2024-02-02 09:23:37', '2024-02-02 09:45:44'),
-(31, 'Room 2', 23, 23323, 1, 'available', '2024-02-02 09:50:18', '2024-02-02 09:50:18');
+(31, 'Room 2', 23, 23323, 1, 'available', '2024-02-02 09:50:18', '2024-02-02 09:50:18'),
+(32, 'roo m test', 2, 4433, 1, 'available', '2024-02-03 01:51:59', '2024-02-03 06:40:39'),
+(33, 'Room test 3', 2, 7500, 0, 'under maintenance', '2024-02-03 04:08:05', '2024-02-03 04:08:05');
 
 -- --------------------------------------------------------
 
@@ -158,8 +185,13 @@ CREATE TABLE `room_inventory_item` (
 --
 
 INSERT INTO `room_inventory_item` (`id`, `roomID`, `inventoryItemID`, `quantity_used`, `updated_at`, `created_at`) VALUES
-(25, 30, 7, 3, '2024-02-02 10:14:08', '2024-02-02 10:14:08'),
-(27, 31, 7, 3, '2024-02-02 10:34:54', '2024-02-02 10:34:54');
+(29, 31, 8, 4, '2024-02-03 01:51:43', '2024-02-03 01:10:04'),
+(30, 31, 9, 17, '2024-02-04 08:18:00', '2024-02-03 01:25:32'),
+(31, 30, 7, 2, '2024-02-03 01:43:31', '2024-02-03 01:25:47'),
+(32, 30, 9, 24, '2024-02-03 01:25:47', '2024-02-03 01:25:47'),
+(34, 30, 8, 2, '2024-02-03 01:43:31', '2024-02-03 01:43:31'),
+(36, 32, 9, 2, '2024-02-03 04:03:57', '2024-02-03 04:03:57'),
+(37, 33, 7, 2, '2024-02-03 04:08:06', '2024-02-03 04:08:06');
 
 -- --------------------------------------------------------
 
@@ -186,7 +218,7 @@ CREATE TABLE `students` (
   `s_college` varchar(255) NOT NULL,
   `s_program` varchar(255) NOT NULL,
   `s_cor` blob DEFAULT NULL,
-  `assigned_room` varchar(255) DEFAULT NULL,
+  `assigned_room` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -196,8 +228,9 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `first_name`, `middle_name`, `last_name`, `birthdate`, `gender`, `address`, `contact`, `email`, `image`, `e_fullname`, `e_contact`, `e_address`, `e_relation`, `s_id`, `s_college`, `s_program`, `s_cor`, `assigned_room`, `created_at`, `updated_at`) VALUES
-(28, 'Lance Ruzel', 'Caballes', 'Ambrocio', '2024-01-02', 'Male', 'Limay, Bataan', '09205524353', 'lanceruzel1202@gmail.codm', '', 'Sample Guardian 1', '09209244353', 'Limay, Bataan', 'Mother', '21-06231', 'dsadsadsa', 'dsadsadasdasd', '', '', '2024-01-29 01:14:29', '2024-01-31 02:55:43'),
-(32, 'Michaella', 'Bagtasl', 'Quezon', '2024-01-02', 'Female', 'Lamao, Bataan', '09205525343', 'michaellaquezon02@gmail.com', '', 'Sample Guardian 2', '092455253437', 'Lamao, Bataan', 'Mother', '21-062341', 'dsadasdsadbvbvcb', 'sadsadasd', '', '', '2024-01-29 01:20:46', '2024-01-31 09:05:22');
+(28, 'Lance Ruzel', 'Caballes', 'Ambrocio', '2024-01-02', 'Male', 'Limay, Bataan', '09205524353', 'lanceruzel1202@gmail.codm', '', 'Sample Guardian 1', '09209244353', 'Limay, Bataan', 'Mother', '21-06231', 'dsadsadsa', 'dsadsadasdasd', '', 32, '2024-01-29 01:14:29', '2024-02-03 03:49:36'),
+(32, 'Michaella', 'Bagtas', 'Quezon', '2024-01-02', 'Female', 'Lamao, Bataan', '09205525343', 'michaellaquezon02@gmail.com', '', 'Sample Guardian 2', '092455253437', 'Lamao, Bataan', 'Mother', '21-062341', 'dsadasdsadbvbvcb', 'sadsadasd', '', 32, '2024-01-29 01:20:46', '2024-02-03 05:52:01'),
+(37, 'Juan ', 'Dela ', 'Cruz', '2024-01-29', 'Male', 'Balanga, Bataan', '09090909', 'juandelacruz@gmail.com', '', 'Sample Contact Emergency1', '09090909', 'Balanga, Bataan', 'Mother', '2332', 'dsadsadsasadasd', 'dsadasdasdasdasddsadada', '', 33, '2024-02-03 06:43:29', '2024-02-03 06:43:49');
 
 --
 -- Indexes for dumped tables
@@ -209,6 +242,13 @@ INSERT INTO `students` (`id`, `first_name`, `middle_name`, `last_name`, `birthda
 ALTER TABLE `accounts`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `accounts_email_unique` (`email`);
+
+--
+-- Indexes for table `bills`
+--
+ALTER TABLE `bills`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `bills_studentid_foreign` (`studentID`);
 
 --
 -- Indexes for table `inventory_item`
@@ -258,19 +298,25 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `bills`
+--
+ALTER TABLE `bills`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `inventory_item`
 --
 ALTER TABLE `inventory_item`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -282,23 +328,29 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `room_inventory_item`
 --
 ALTER TABLE `room_inventory_item`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `bills`
+--
+ALTER TABLE `bills`
+  ADD CONSTRAINT `bills_studentid_foreign` FOREIGN KEY (`studentID`) REFERENCES `students` (`id`);
 
 --
 -- Constraints for table `room_inventory_item`
