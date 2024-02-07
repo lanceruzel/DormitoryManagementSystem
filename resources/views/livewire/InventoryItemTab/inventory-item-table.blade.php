@@ -43,7 +43,7 @@
                                     x{{ $item->stock_available }}
                                 @endif
                             </td>
-                            <td class="text-center">₱{{ $item->unit_price }}</td>
+                            <td class="text-center">₱{{ number_format($item->unit_price, 2) }}</td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     </i> Modify
