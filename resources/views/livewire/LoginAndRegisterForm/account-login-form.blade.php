@@ -18,9 +18,6 @@
         <div class="mb-3 form-password-toggle">
             <div class="d-flex justify-content-between">
                 <label class="form-label" for="password">Password</label>
-                <a href="auth-forgot-password-basic.html">
-                    <small>Forgot Password?</small>
-                </a>
             </div>
 
             <div class="input-group input-group-merge">
@@ -34,13 +31,6 @@
                         {{ $message }}
                     @enderror
                 </div>
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox"/>
-                <label class="form-check-label" for="remember-me">Remember Me</label>
             </div>
         </div>
 
