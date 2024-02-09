@@ -12,9 +12,7 @@
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow hstack g-5" href="javascript:void(0);"
                     data-bs-toggle="dropdown">
-                    <div class="avatar avatar-online me-3">
-                        <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                    </div>
+                    <span class="mx-3">|</span>
 
                     <span>{{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}</span>
                 </a>
@@ -23,10 +21,7 @@
                         <a class="dropdown-item" href="#">
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
-                                    <div class="avatar avatar-online">
-                                        <img src="../assets/img/avatars/1.png" alt
-                                            class="w-px-40 h-auto rounded-circle" />
-                                    </div>
+                                    |
                                 </div>
                                 <div class="flex-grow-1">
                                     <span
