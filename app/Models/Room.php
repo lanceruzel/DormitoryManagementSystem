@@ -26,4 +26,8 @@ class Room extends Model
     public function students(){
         return $this->hasMany(Student::class, 'assigned_room');
     }
+
+    public function getOccupantsAttribute(){
+        return $this->students()->count();
+    }
 }

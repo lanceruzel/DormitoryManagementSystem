@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2024 at 07:59 PM
+-- Generation Time: Feb 07, 2024 at 06:50 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -43,7 +43,7 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `first_name`, `last_name`, `email`, `email_verified_at`, `password`, `created_at`, `updated_at`) VALUES
-(4, 'Lance Ruzel', 'Ambrocio', 'test123@gmail.com', NULL, '$2y$12$58SdbJNYXgyYIOlVnQLTiOJKmdSABl94zfWvuB4HdvqZkVPHW/CSu', '2024-02-06 09:48:58', '2024-02-06 10:58:28');
+(4, 'Lance Ruzel', 'Ambrocio', 'test123@gmail.com', NULL, '$2y$12$57WTRUbnKbyGgIodpWSBA.8WMiFvPZbtrHJZedpHF9w/iHyHOzT4e', '2024-02-06 09:48:58', '2024-02-07 00:47:37');
 
 -- --------------------------------------------------------
 
@@ -209,7 +209,7 @@ CREATE TABLE `students` (
   `address` varchar(255) NOT NULL,
   `contact` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `image` blob DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
   `e_fullname` varchar(255) NOT NULL,
   `e_contact` varchar(255) NOT NULL,
   `e_address` varchar(255) NOT NULL,
@@ -217,7 +217,7 @@ CREATE TABLE `students` (
   `s_id` varchar(255) NOT NULL,
   `s_college` varchar(255) NOT NULL,
   `s_program` varchar(255) NOT NULL,
-  `s_cor` blob DEFAULT NULL,
+  `s_cor` varchar(255) DEFAULT NULL,
   `assigned_room` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -228,9 +228,9 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `first_name`, `middle_name`, `last_name`, `birthdate`, `gender`, `address`, `contact`, `email`, `image`, `e_fullname`, `e_contact`, `e_address`, `e_relation`, `s_id`, `s_college`, `s_program`, `s_cor`, `assigned_room`, `created_at`, `updated_at`) VALUES
-(28, 'Lance Ruzel', 'Caballes', 'Ambrocio', '2024-01-02', 'Male', 'Limay, Bataan', '09205524353', 'lanceruzel1202@gmail.codm', '', 'Sample Guardian 1', '09209244353', 'Limay, Bataan', 'Mother', '21-06231', 'dsadsadsa', 'dsadsadasdasd', '', 32, '2024-01-29 01:14:29', '2024-02-03 03:49:36'),
-(32, 'Michaella', 'Bagtas', 'Quezon', '2024-01-02', 'Female', 'Lamao, Bataan', '09205525343', 'michaellaquezon02@gmail.com', '', 'Sample Guardian 2', '092455253437', 'Lamao, Bataan', 'Mother', '21-062341', 'dsadasdsadbvbvcb', 'sadsadasd', '', 32, '2024-01-29 01:20:46', '2024-02-03 05:52:01'),
-(37, 'Juan ', 'Dela ', 'Cruz', '2024-01-29', 'Male', 'Balanga, Bataan', '09090909', 'juandelacruz@gmail.com', '', 'Sample Contact Emergency1', '09090909', 'Balanga, Bataan', 'Mother', '2332', 'dsadsadsasadasd', 'dsadasdasdasdasddsadada', '', 33, '2024-02-03 06:43:29', '2024-02-03 06:43:49');
+(28, 'Lance Ruzel', 'Caballes', 'Ambrocio', '2024-01-02', 'Male', 'Limay, Bataan', '09205524353', 'lanceruzel1202@gmail.codm', 'public/profile/JTKUKGpfD9DyMhJR9hMXrOod1joI2D8CmNuZcRkv.png', 'Sample Guardian 1', '09209244353', 'Limay, Bataan', 'Mother', '21-06231', 'dsadsadsa', 'dsadsadasdasd', NULL, 32, '2024-01-29 01:14:29', '2024-02-07 08:40:22'),
+(32, 'Michaella', 'Bagtas', 'Quezon', '2024-01-02', 'Female', 'Lamao, Bataan', '09205525343', 'michaellaquezon02@gmail.com', 'public/profile/vYJaioj4fw3LAnXPdRXPV2RKr4XUrBvBmHEcvLIs.png', 'Sample Guardian 2', '092455253437', 'Lamao, Bataan', 'Mother', '21-062341', 'dsadasdsadbvbvcb', 'sadsadasd', 'public/cor/9jB9Vawa8rIMLSikgRodNVJbrYS3uuLSvMvpK15Q.png', 31, '2024-01-29 01:20:46', '2024-02-07 08:15:42'),
+(37, 'Juan ', 'Dela ', 'Cruz', '2024-01-29', 'Male', 'Balanga, Bataan', '09090909', 'juandelacruz@gmail.com', 'public/profile/m5PUzhdRFPc3rMAIvXVmQfNbVwRs8Vpu67jNST4u.png', 'Sample Contact Emergency1', '09090909', 'Balanga, Bataan', 'Mother', '2332', 'dsadsadsasadasd', 'dsadasdasdasdasddsadada', 'public/cor/7V4ETFAbgvPg5DkSYMa4wyktknnqDkoJOImCpLQZ.png', 33, '2024-02-03 06:43:29', '2024-02-07 08:42:07');
 
 --
 -- Indexes for dumped tables

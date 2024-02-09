@@ -1,6 +1,6 @@
 <div>
     @if(request()->routeIS('admin-dashboard'))
-        @include('admin-tabs.dashboard')
+        @livewire('dashboard')
     @endif
 
     @if(request()->routeIS('admin-room'))
