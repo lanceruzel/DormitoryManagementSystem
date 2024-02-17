@@ -23,13 +23,13 @@
             <tbody class="table-border-bottom-0">
                 @if(count($this->tableItems) === 0)
                     <tr class="text-bg-secondary">
-                        <td colspan="4" class="text-center">
+                        <td colspan="7" class="text-center">
                             <div class="alert alert-dark mb-0" role="alert">There are no record available</div>
                         </td>
                     </tr>
 
                     <tr>
-                        <td colspan="4"></td>    
+                        <td colspan="7"></td>    
                     </tr>
                 @else
                     @foreach ($this->tableItems as $item)
