@@ -331,7 +331,7 @@
                     </label>
 
                     <select wire:model="assigned_room" class="form-select @error('assigned_room') is-invalid @enderror" data-live-search="true" data-size="5">
-                            <option value="0" selected disabled>Select Room</option>
+                            <option value="0" selected>None</option>
                         
                         @foreach ($this->rooms as $item)
                             <option value="{{ $item->id }}">{{ $item->room_name }}</option>
