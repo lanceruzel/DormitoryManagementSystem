@@ -37,7 +37,7 @@
                             <td>{{ $student->email }}</td>
                             <td class="text-center">{{ $student->gender }}</td>
                             <td class="text-center">{{ $student->contact }}</td>
-                            <td class="text-center">{{ $student->room->room_name }}</td>
+                            <td class="text-center">{{ ($student->assigned_room === 0) ? 'None' : $student->room->room_name }}</td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     </i> Modify
